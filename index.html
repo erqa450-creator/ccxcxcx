@@ -1470,13 +1470,57 @@
 
     <!-- ===== HERO GRADUATION CAP — large floating focal point ===== -->
     <!-- soft warm halo behind the cap -->
-    <g>
+    <defs>
       <radialGradient id="cap-halo" cx="50%" cy="50%" r="50%">
         <stop offset="0%" stop-color="#fff3c4" stop-opacity=".85"/>
         <stop offset="55%" stop-color="#fde9a8" stop-opacity=".4"/>
         <stop offset="100%" stop-color="#fde9a8" stop-opacity="0"/>
       </radialGradient>
+      <radialGradient id="cap-core-halo" cx="50%" cy="45%" r="52%">
+        <stop offset="0%" stop-color="#fff9df" stop-opacity=".8"/>
+        <stop offset="72%" stop-color="#fff2b8" stop-opacity=".18"/>
+        <stop offset="100%" stop-color="#fff2b8" stop-opacity="0"/>
+      </radialGradient>
+      <linearGradient id="cap-top-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#3a3230"/>
+        <stop offset="35%" stop-color="#151211"/>
+        <stop offset="100%" stop-color="#060505"/>
+      </linearGradient>
+      <linearGradient id="cap-top-highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity=".14"/>
+        <stop offset="42%" stop-color="#ffffff" stop-opacity=".05"/>
+        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="cap-skull-fill" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#2f2a29"/>
+        <stop offset="55%" stop-color="#121110"/>
+        <stop offset="100%" stop-color="#050505"/>
+      </linearGradient>
+      <linearGradient id="cap-gold-trim" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#8f6420"/>
+        <stop offset="50%" stop-color="#e8c66a"/>
+        <stop offset="100%" stop-color="#9f7126"/>
+      </linearGradient>
+      <linearGradient id="cap-tassel-fill" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#d94a43"/>
+        <stop offset="100%" stop-color="#821b1d"/>
+      </linearGradient>
+      <radialGradient id="cap-button-fill" cx="40%" cy="35%" r="60%">
+        <stop offset="0%" stop-color="#f2d784"/>
+        <stop offset="50%" stop-color="#c89b3c"/>
+        <stop offset="100%" stop-color="#7f5716"/>
+      </radialGradient>
+      <filter id="cap-shadow" x="-35%" y="-35%" width="170%" height="190%">
+        <feDropShadow dx="0" dy="10" stdDeviation="8" flood-color="#000000" flood-opacity=".28"/>
+        <feDropShadow dx="0" dy="26" stdDeviation="22" flood-color="#000000" flood-opacity=".18"/>
+      </filter>
+      <filter id="cap-soft-shadow" x="-50%" y="-80%" width="200%" height="240%">
+        <feGaussianBlur stdDeviation="22"/>
+      </filter>
+    </defs>
+    <g class="hero-cap-halo">
       <circle cx="800" cy="440" r="240" fill="url(#cap-halo)"/>
+      <circle cx="798" cy="436" r="154" fill="url(#cap-core-halo)"/>
       <!-- subtle radiating sketch rays -->
       <g stroke="#c9a544" stroke-width="1.2" stroke-linecap="round" opacity=".55" fill="none">
         <line x1="800" y1="220" x2="800" y2="190"/>
@@ -1492,42 +1536,58 @@
     </g>
 
     <!-- THE CAP itself, hero size, tilted -->
-    <g transform="translate(800,440) rotate(-8)" filter="url(#sketch)">
-      <!-- under-cap rounded skullcap -->
-      <path d="M-130 0 Q 0 -34 130 0 Q 70 36 0 36 Q -70 36 -130 0 Z"
-            fill="#1a1a1a" stroke="#0a0a0a" stroke-width="3"/>
-      <!-- top highlight on skullcap -->
-      <path d="M-110 -10 Q 0 -32 110 -10" fill="none" stroke="#5a5a5a" stroke-width="2" opacity=".55"/>
-      <!-- mortarboard (flat square top) -->
-      <path d="M-160 -22 L 0 -78 L 160 -22 L 0 26 Z"
-            fill="#0a0a0a" stroke="#0a0a0a" stroke-width="3"/>
-      <!-- mortarboard highlight edges -->
-      <path d="M-160 -22 L 0 -78 L 160 -22" fill="none" stroke="#3a3a3a" stroke-width="2"/>
-      <path d="M-160 -22 L 0 26" stroke="#2a2a2a" stroke-width="1.4" opacity=".7"/>
-      <path d="M160 -22 L 0 26" stroke="#2a2a2a" stroke-width="1.4" opacity=".7"/>
-      <!-- center button -->
-      <circle cx="0" cy="-78" r="8" fill="#a02828" stroke="#1a1a1a" stroke-width="1.6"/>
-      <circle cx="-2" cy="-80" r="2.5" fill="#d04848" opacity=".7"/>
-      <!-- tassel cord from button -->
-      <path d="M0 -78 Q 80 -60 140 -10 Q 160 30 150 70"
-            fill="none" stroke="#a02828" stroke-width="3" stroke-linecap="round"/>
-      <!-- tassel head -->
-      <g transform="translate(150,70)">
-        <!-- knot -->
-        <ellipse cx="0" cy="0" rx="9" ry="6" fill="#a02828" stroke="#5a1010" stroke-width="1.4"/>
-        <!-- strands -->
-        <g stroke="#a02828" stroke-width="2" stroke-linecap="round">
-          <line x1="-8" y1="6" x2="-10" y2="36"/>
-          <line x1="-4" y1="6" x2="-5" y2="40"/>
-          <line x1="0" y1="6" x2="0" y2="44"/>
-          <line x1="4" y1="6" x2="5" y2="40"/>
-          <line x1="8" y1="6" x2="10" y2="36"/>
-          <line x1="-6" y1="6" x2="-7" y2="32"/>
-          <line x1="6" y1="6" x2="7" y2="32"/>
+    <g>
+      <ellipse class="hero-cap-shadow" cx="816" cy="526" rx="178" ry="44"
+               fill="#50261f" opacity=".18" filter="url(#cap-soft-shadow)"
+               transform="rotate(-4 816 526)"/>
+      <g transform="translate(800,438) rotate(-8)">
+        <g class="hero-cap-float" filter="url(#cap-shadow)">
+          <!-- under-cap rounded skullcap -->
+          <path d="M-132 2 Q 0 -36 132 2 Q 78 42 0 42 Q -78 42 -132 2 Z"
+                fill="url(#cap-skull-fill)" stroke="#080808" stroke-width="3"/>
+          <path d="M-104 10 Q 0 -12 104 10" fill="none" stroke="#c9a544" stroke-width="2" opacity=".45"/>
+          <path d="M-112 -8 Q 0 -31 112 -8" fill="none" stroke="#8d8582" stroke-width="2.2" opacity=".48"/>
+          <!-- visible underside edge for more depth -->
+          <path d="M-146 -16 L 0 36 L 146 -16 L 0 8 Z"
+                fill="#231d1c" opacity=".82" stroke="#120f0f" stroke-width="2"/>
+          <!-- mortarboard (flat square top) -->
+          <path d="M-164 -24 L 0 -82 L 164 -24 L 0 28 Z"
+                fill="url(#cap-top-fill)" stroke="#080808" stroke-width="3"/>
+          <path d="M-144 -26 L 0 -72 L 144 -26 L 0 18 Z"
+                fill="url(#cap-top-highlight)" opacity=".95"/>
+          <!-- mortarboard highlight edges -->
+          <path d="M-164 -24 L 0 -82 L 164 -24" fill="none" stroke="#5b534d" stroke-width="2.1" opacity=".75"/>
+          <path d="M-156 -20 L 0 -76 L 156 -20" fill="none" stroke="url(#cap-gold-trim)" stroke-width="2.2" opacity=".9"/>
+          <path d="M-164 -24 L 0 28" stroke="#2a2a2a" stroke-width="1.5" opacity=".78"/>
+          <path d="M164 -24 L 0 28" stroke="#2a2a2a" stroke-width="1.5" opacity=".78"/>
+          <path d="M-112 -36 Q 0 -56 112 -36" fill="none" stroke="#dbcfaf" stroke-width="1.2" opacity=".26" stroke-dasharray="2,4"/>
+          <!-- center button -->
+          <circle cx="0" cy="-82" r="9" fill="url(#cap-button-fill)" stroke="#5c3c10" stroke-width="1.8"/>
+          <circle cx="-2" cy="-84" r="2.8" fill="#fff1b8" opacity=".78"/>
+          <circle cx="0" cy="-82" r="13" fill="none" stroke="#f0da90" stroke-width="1.2" opacity=".5"/>
+          <!-- tassel cord from button -->
+          <path d="M0 -82 Q 82 -64 142 -12 Q 164 30 154 74"
+                fill="none" stroke="url(#cap-tassel-fill)" stroke-width="3.2" stroke-linecap="round"/>
+          <!-- tassel head -->
+          <g class="hero-cap-tassel" transform="translate(154,74)">
+            <ellipse cx="0" cy="0" rx="10" ry="7" fill="url(#cap-tassel-fill)" stroke="#5a1010" stroke-width="1.4"/>
+            <ellipse cx="0" cy="-2" rx="4.5" ry="2.2" fill="#f0da90" opacity=".65"/>
+            <g stroke="url(#cap-tassel-fill)" stroke-width="2.1" stroke-linecap="round">
+              <line x1="-9" y1="7" x2="-12" y2="38"/>
+              <line x1="-5" y1="7" x2="-6" y2="43"/>
+              <line x1="-1" y1="7" x2="-1" y2="47"/>
+              <line x1="3" y1="7" x2="4" y2="43"/>
+              <line x1="7" y1="7" x2="10" y2="38"/>
+              <line x1="-7" y1="7" x2="-8" y2="34"/>
+              <line x1="6" y1="7" x2="7" y2="34"/>
+            </g>
+            <path d="M-12 46 Q 0 52 12 46" fill="none" stroke="#6c1618" stroke-width="2" opacity=".6"/>
+          </g>
+          <!-- subtle crest -->
+          <path d="M0 1 q -10 8 -18 22 q 11 -1 18 -12 q 7 11 18 12 q -8 -14 -18 -22 z"
+                fill="#d9b85c" opacity=".8"/>
         </g>
       </g>
-      <!-- diagonal stitch line on mortarboard -->
-      <path d="M-110 -34 Q 0 -52 110 -34" fill="none" stroke="#3a3a3a" stroke-width="1" opacity=".5" stroke-dasharray="2,3"/>
     </g>
 
     <!-- floating petals + tiny stars around the cap (sparse, scene-1 palette) -->
