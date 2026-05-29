@@ -204,6 +204,46 @@ button{background:none;border:none;cursor:pointer;font:inherit;color:inherit}
 .scene-dot:hover{transform:scale(1.2)}
 .scene-dot.active{background:#222;box-shadow:0 0 0 3px rgba(0,0,0,.15)}
 
+/* ===== Scene 7 hero cap ===== */
+.scene-7 .hero-cap-halo{
+  animation:heroCapGlow 5.8s ease-in-out infinite;
+}
+.scene-7 .hero-cap-shadow{
+  transform-origin:center;
+  transform-box:fill-box;
+  animation:heroCapShadow 5.8s ease-in-out infinite;
+}
+.scene-7 .hero-cap-float{
+  transform-origin:center;
+  transform-box:fill-box;
+  animation:heroCapFloat 5.8s ease-in-out infinite;
+}
+.scene-7 .hero-cap-tassel{
+  transform-origin:50% 0%;
+  transform-box:fill-box;
+  animation:heroCapTassel 3.2s ease-in-out infinite;
+}
+
+@keyframes heroCapFloat{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  50%{transform:translateY(-8px) rotate(.8deg)}
+}
+
+@keyframes heroCapGlow{
+  0%,100%{opacity:.94}
+  50%{opacity:1}
+}
+
+@keyframes heroCapShadow{
+  0%,100%{transform:scale(1);opacity:.18}
+  50%{transform:scale(.94);opacity:.12}
+}
+
+@keyframes heroCapTassel{
+  0%,100%{transform:rotate(4deg)}
+  50%{transform:rotate(-4deg)}
+}
+
 @media (max-width:900px){
   .paper-card{right:50%;top:auto;bottom:18vh;transform:translateX(50%) rotate(.6deg);width:80vw}
   .scene-counter{right:24px;top:80px;font-size:32px}
