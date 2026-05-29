@@ -1,0 +1,1733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>给小Z — 我们的四年</title>
+<link rel="stylesheet" href="style.css?v=23" />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Indie+Flower&family=Patrick+Hand&family=Special+Elite&family=Architects+Daughter&family=Long+Cang&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============ GLOBAL SVG DEFS ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="sketch" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="2" seed="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.6"/>
+    </filter>
+    <filter id="sketch2" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="7" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4"/>
+    </filter>
+    <filter id="rough" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="0.8"/>
+    </filter>
+
+    <pattern id="brick" x="0" y="0" width="120" height="60" patternUnits="userSpaceOnUse">
+      <rect width="120" height="60" fill="#ececec"/>
+      <g fill="none" stroke="#7a7a7a" stroke-width="1.1" filter="url(#sketch2)">
+        <path d="M0 30 L120 30"/><path d="M0 0 L120 0"/><path d="M0 60 L120 60"/>
+        <path d="M60 0 L60 30"/><path d="M0 30 L0 60"/><path d="M120 30 L120 60"/>
+        <path d="M0 0 L0 30"/><path d="M120 0 L120 30"/>
+      </g>
+    </pattern>
+
+    <pattern id="plaster" x="0" y="0" width="300" height="300" patternUnits="userSpaceOnUse">
+      <rect width="300" height="300" fill="#f1f0ec"/>
+    </pattern>
+
+    <pattern id="cork" x="0" y="0" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="#efe6d0"/>
+      <circle cx="1" cy="2" r=".5" fill="#c9b88b"/>
+      <circle cx="4" cy="4" r=".4" fill="#b5a273"/>
+      <circle cx="2" cy="5" r=".3" fill="#d4c39a"/>
+    </pattern>
+
+    <pattern id="ground" x="0" y="0" width="180" height="180" patternUnits="userSpaceOnUse">
+      <rect width="180" height="180" fill="#e8e6df"/>
+      <g fill="#9d978c" opacity=".35">
+        <circle cx="20" cy="40" r=".7"/><circle cx="60" cy="120" r=".5"/>
+        <circle cx="100" cy="30" r=".6"/><circle cx="140" cy="80" r=".5"/>
+        <circle cx="160" cy="150" r=".7"/><circle cx="50" cy="80" r=".4"/>
+        <circle cx="120" cy="150" r=".5"/>
+      </g>
+    </pattern>
+
+    <!-- reusable photo placeholder -->
+    <symbol id="photoPH" viewBox="0 0 100 80">
+      <rect width="100" height="80" fill="#fbfaf4" stroke="#2a2a2a" stroke-width="1.4"/>
+      <circle cx="30" cy="30" r="10" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <rect x="20" y="22" width="8" height="6" fill="none" stroke="#2a2a2a" stroke-width="1"/>
+      <path d="M10 70 L 40 45 L 60 60 L 90 35 L 90 75 L 10 75 Z" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+      <text x="50" y="68" text-anchor="middle" font-family="'Special Elite',monospace" font-size="8" fill="#7a7a7a">PHOTO</text>
+    </symbol>
+
+    <!-- grad cap symbol -->
+    <symbol id="gradCap" viewBox="0 0 80 60">
+      <path d="M5 25 L 40 8 L 75 25 L 40 42 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M20 32 L 20 50 Q 40 60 60 50 L 60 32" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M70 25 L 70 45 Q 73 48 76 45" fill="none" stroke="#2a2a2a" stroke-width="1.6"/>
+      <circle cx="76" cy="47" r="3" fill="#2a2a2a"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- HUD -->
+<div class="hud">
+  <button class="hud-btn" id="menuBtn" title="回到校门">
+    <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="#222" stroke-width="2" stroke-linecap="round" fill="none" filter="url(#rough)"/></svg>
+  </button>
+  <button class="hud-btn" id="soundBtn" title="声音">
+    <svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#222" filter="url(#rough)"/><path d="M16 8a5 5 0 010 8M19 5a9 9 0 010 14" stroke="#222" stroke-width="1.6" fill="none" stroke-linecap="round" filter="url(#rough)"/></svg>
+  </button>
+  <button class="hud-btn" id="trophyBtn" title="毕业典礼">
+    <svg viewBox="0 0 24 24"><path d="M7 4h10v3a5 5 0 01-10 0V4z M5 6H3v2a3 3 0 003 3 M19 6h2v2a3 3 0 01-3 3 M10 14h4v3h-4z M8 19h8" stroke="#222" stroke-width="1.6" fill="none" stroke-linecap="round" filter="url(#rough)"/></svg>
+  </button>
+</div>
+
+<div class="scene-counter">#<span id="sceneNum">0</span></div>
+
+<!-- ====================================================================== -->
+<!-- ============ SCENE 1 — 校门：给小Z ================================== -->
+<!-- ====================================================================== -->
+<section class="scene scene-1 active" data-scene="1">
+  <svg class="scene-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <rect x="0" y="0" width="1600" height="720" fill="url(#brick)"/>
+    <rect x="0" y="720" width="1600" height="180" fill="url(#ground)"/>
+
+    <!-- bunting flags -->
+    <g filter="url(#sketch2)">
+      <path d="M120 80 Q 800 140 1480 80" stroke="#2a2a2a" stroke-width="1.2" fill="none"/>
+      <g stroke="#2a2a2a" stroke-width="1.4" fill="#fbfaf6">
+        <path d="M200 90 L 220 90 L 210 112 Z"/><path d="M280 100 L 300 100 L 290 122 Z"/>
+        <path d="M360 108 L 380 108 L 370 130 Z"/><path d="M440 116 L 460 116 L 450 138 Z"/>
+        <path d="M520 122 L 540 122 L 530 144 Z"/><path d="M600 126 L 620 126 L 610 148 Z"/>
+        <path d="M680 130 L 700 130 L 690 152 Z"/><path d="M760 132 L 780 132 L 770 154 Z"/>
+        <path d="M840 132 L 860 132 L 850 154 Z"/><path d="M920 130 L 940 130 L 930 152 Z"/>
+        <path d="M1000 126 L 1020 126 L 1010 148 Z"/><path d="M1080 122 L 1100 122 L 1090 144 Z"/>
+        <path d="M1160 116 L 1180 116 L 1170 138 Z"/><path d="M1240 108 L 1260 108 L 1250 130 Z"/>
+        <path d="M1320 100 L 1340 100 L 1330 122 Z"/><path d="M1400 90 L 1420 90 L 1410 112 Z"/>
+      </g>
+    </g>
+
+    <!-- TREE -->
+    <g filter="url(#sketch)">
+      <path d="M380 720 C 365 600, 360 480, 365 360 C 365 320, 360 280, 350 240 L 340 200 L 330 170"
+            fill="none" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M380 720 C 395 620, 400 500, 395 380 L 405 320 L 415 280 L 425 240 L 432 210"
+            fill="none" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M395 380 C 350 360, 300 340, 260 320" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M395 380 C 460 365, 510 350, 555 330" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M380 310 C 420 290, 460 270, 510 260" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M370 280 C 330 270, 290 260, 250 250" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M360 230 C 320 220, 280 215, 240 220" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M340 200 C 380 170, 420 150, 470 145" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M330 170 C 290 150, 250 145, 210 150" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <g fill="#fafafa" stroke="#2a2a2a" stroke-width="2">
+        <path d="M120 250 q -25 -40 15 -55 q 10 -35 50 -25 q 25 -30 55 -10 q 40 -10 50 25 q 35 5 30 45 q 20 30 -15 50 q -5 35 -45 30 q -25 25 -55 5 q -40 15 -55 -20 q -40 -10 -30 -45 z"/>
+        <path d="M260 130 q -15 -30 25 -40 q 5 -25 40 -20 q 20 -20 45 -5 q 35 -5 40 25 q 25 10 15 40 q 15 25 -20 35 q -5 30 -40 20 q -25 15 -45 -5 q -35 5 -40 -25 q -25 -5 -20 -25 z"/>
+        <path d="M380 200 q -15 -25 20 -35 q 5 -20 35 -15 q 20 -15 40 0 q 30 -5 30 25 q 20 5 10 30 q 10 20 -20 25 q -5 25 -35 15 q -20 10 -35 -5 q -30 0 -30 -20 q -20 -5 -15 -20 z"/>
+      </g>
+    </g>
+
+    <!-- graduation hat hanging from tree -->
+    <g transform="translate(490,290)" filter="url(#sketch2)">
+      <path d="M0 0 L0 130" stroke="#2a2a2a" stroke-width="1"/>
+      <g transform="translate(-40,130) scale(1.1)">
+        <use href="#gradCap"/>
+      </g>
+    </g>
+
+    <!-- SIGN -->
+    <g filter="url(#sketch)">
+      <path d="M650 180 L 970 180 L 985 215 L 635 215 Z" fill="#e6e0d4" stroke="#2a2a2a" stroke-width="2.2"/>
+      <path d="M660 195 L 975 195" stroke="#a59b86" stroke-width="1" opacity=".7"/>
+      <g stroke="#3a3a3a" stroke-width="1">
+        <path d="M650 180 L 635 215"/><path d="M660 180 L 645 215"/><path d="M670 180 L 655 215"/>
+        <path d="M970 180 L 985 215"/><path d="M960 180 L 975 215"/><path d="M950 180 L 965 215"/>
+      </g>
+      <g stroke="#2a2a2a" stroke-width="1.6" fill="none">
+        <g transform="translate(720,215)">
+          <ellipse cx="0" cy="6" rx="4" ry="6"/><ellipse cx="0" cy="18" rx="4" ry="6"/>
+          <ellipse cx="0" cy="30" rx="4" ry="6"/><ellipse cx="0" cy="42" rx="4" ry="6"/>
+          <ellipse cx="0" cy="54" rx="4" ry="6"/>
+        </g>
+        <g transform="translate(900,215)">
+          <ellipse cx="0" cy="6" rx="4" ry="6"/><ellipse cx="0" cy="18" rx="4" ry="6"/>
+          <ellipse cx="0" cy="30" rx="4" ry="6"/><ellipse cx="0" cy="42" rx="4" ry="6"/>
+          <ellipse cx="0" cy="54" rx="4" ry="6"/>
+        </g>
+      </g>
+      <path d="M680 280 L 940 275 L 950 360 L 670 365 Z" fill="#e6dcc6" stroke="#2a2a2a" stroke-width="2.5"/>
+      <path d="M685 290 L 945 286" stroke="#a89b7e" stroke-width="1" opacity=".7"/>
+      <path d="M675 355 L 945 350" stroke="#a89b7e" stroke-width="1" opacity=".7"/>
+    </g>
+    <text x="810" y="338" text-anchor="middle"
+          font-family="'ZCOOL KuaiLe','Caveat',cursive" font-weight="700" font-size="58"
+          fill="#fafaf7" stroke="#1a1a1a" stroke-width="1.6"
+          paint-order="stroke fill" style="letter-spacing:6px">给 小Z 的四年</text>
+
+    <!-- DOOR -->
+    <g filter="url(#sketch)">
+      <path d="M670 410 L 950 410 L 950 800 L 670 800 Z" fill="#f3eee2" stroke="#2a2a2a" stroke-width="3"/>
+      <path d="M810 410 L 810 800" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M695 440 L 795 440 L 795 560 L 695 560 Z" fill="none" stroke="#2a2a2a" stroke-width="1.4"/>
+      <path d="M695 600 L 795 600 L 795 780 L 695 780 Z" fill="none" stroke="#2a2a2a" stroke-width="1.4"/>
+      <path d="M825 440 L 935 440 L 935 560 L 825 560 Z" fill="none" stroke="#2a2a2a" stroke-width="1.4"/>
+      <path d="M825 600 L 935 600 L 935 780 L 825 780 Z" fill="none" stroke="#2a2a2a" stroke-width="1.4"/>
+      <g fill="none" stroke="#2a2a2a" stroke-width="1.8">
+        <rect x="780" y="600" width="22" height="8" rx="2"/><circle cx="775" cy="604" r="3.5"/>
+        <rect x="817" y="600" width="22" height="8" rx="2"/><circle cx="842" cy="604" r="3.5"/>
+        <circle cx="787" cy="640" r="3"/><path d="M787 642 L 787 650"/>
+        <circle cx="833" cy="640" r="3"/><path d="M833 642 L 833 650"/>
+      </g>
+    </g>
+
+    <!-- DOOR STICKERS — graduation themed -->
+    <!-- top-left: school badge -->
+    <g transform="translate(745,490)" filter="url(#sketch2)">
+      <circle r="28" fill="#a02828" stroke="#1a1a1a" stroke-width="1.8"/>
+      <circle r="22" fill="none" stroke="#fff" stroke-width="1.2"/>
+      <text x="0" y="6" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="18" font-weight="900" fill="#fff">校徽</text>
+    </g>
+    <!-- class badge -->
+    <g transform="translate(745,610)" filter="url(#sketch2)">
+      <polygon points="0,-26 22,-13 22,13 0,26 -22,13 -22,-13" fill="#f0c419" stroke="#1a1a1a" stroke-width="1.6"/>
+      <text x="0" y="-2" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="13" font-weight="900" fill="#222">班徽</text>
+      <text x="0" y="12" text-anchor="middle" font-family="'Special Elite',monospace" font-size="9" fill="#222">CLASS</text>
+    </g>
+    <!-- diploma scroll -->
+    <g transform="translate(720,700)" filter="url(#sketch2)">
+      <rect width="96" height="36" rx="2" fill="#fafaf6" stroke="#222" stroke-width="1.4"/>
+      <path d="M0 6 L 96 6 M 0 30 L 96 30" stroke="#222" stroke-width=".8"/>
+      <text x="48" y="24" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="14" font-weight="700" fill="#222">毕业证书</text>
+    </g>
+    <!-- club badge -->
+    <g transform="translate(750,758)" filter="url(#sketch2)">
+      <circle r="14" fill="#3174a1" stroke="#222" stroke-width="1.4"/>
+      <text x="0" y="5" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="10" font-weight="700" fill="#fff">社团</text>
+    </g>
+
+    <!-- right door -->
+    <!-- grad cap big -->
+    <g transform="translate(880,470)" filter="url(#sketch2)">
+      <use href="#gradCap" width="80" height="60" x="-40" y="-30"/>
+    </g>
+    <!-- award medal -->
+    <g transform="translate(875,560)" filter="url(#sketch2)">
+      <path d="M-10 -20 L 0 -10 L 10 -20 L 14 -10 L 8 4 L -8 4 L -14 -10 Z" fill="#d63031" stroke="#222" stroke-width="1.2"/>
+      <circle cx="0" cy="14" r="18" fill="#f5c842" stroke="#222" stroke-width="1.6"/>
+      <text x="0" y="20" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="14" font-weight="900" fill="#222">奖</text>
+    </g>
+    <!-- key chain memory -->
+    <g transform="translate(880,620)" filter="url(#sketch2)">
+      <circle cx="0" cy="0" r="8" fill="none" stroke="#222" stroke-width="1.4"/>
+      <rect x="6" y="-3" width="20" height="6" fill="none" stroke="#222" stroke-width="1.4"/>
+      <path d="M22 -3 L 22 -8 M 26 -3 L 26 -8" stroke="#222" stroke-width="1.4" fill="none"/>
+    </g>
+    <!-- coffee cup -->
+    <g transform="translate(875,665)" filter="url(#sketch2)">
+      <rect x="-12" y="-10" width="24" height="22" fill="#fff" stroke="#222" stroke-width="1.4"/>
+      <path d="M12 -6 q 10 0 10 8 q 0 6 -10 6" fill="none" stroke="#222" stroke-width="1.4"/>
+      <path d="M-8 -16 q 2 -8 4 0 M -2 -16 q 2 -8 4 0" stroke="#222" stroke-width="1" fill="none"/>
+    </g>
+    <!-- bicycle little -->
+    <g transform="translate(875,738)" filter="url(#sketch2)">
+      <circle cx="-12" cy="0" r="9" fill="none" stroke="#222" stroke-width="1.4"/>
+      <circle cx="12" cy="0" r="9" fill="none" stroke="#222" stroke-width="1.4"/>
+      <path d="M-12 0 L 0 -10 L 12 0 L 0 -10 L 4 -16" stroke="#222" stroke-width="1.4" fill="none"/>
+    </g>
+
+    <!-- WINDOW with picture frame inside -->
+    <g filter="url(#sketch)">
+      <rect x="1230" y="430" width="240" height="260" fill="#f5f4ef" stroke="#2a2a2a" stroke-width="3"/>
+      <path d="M1350 430 L 1350 690" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M1230 560 L 1470 560" stroke="#2a2a2a" stroke-width="2"/>
+    </g>
+
+    <!-- CAT -->
+    <g transform="translate(605,690)" filter="url(#sketch)">
+      <path d="M-50 80 Q -55 30 -30 10 Q 0 -10 30 10 Q 55 30 50 80 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M-35 10 Q -38 -25 -15 -35 Q 0 -42 15 -35 Q 38 -25 35 10 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M-30 -25 L -35 -55 L -15 -30 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M30 -25 L 35 -55 L 15 -30 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="2"/>
+      <ellipse cx="-13" cy="-15" rx="4" ry="6" fill="#fff" stroke="#2a2a2a" stroke-width="1.2"/>
+      <ellipse cx="13" cy="-15" rx="4" ry="6" fill="#fff" stroke="#2a2a2a" stroke-width="1.2"/>
+      <circle cx="-13" cy="-15" r="1.2" fill="#2a2a2a"/><circle cx="13" cy="-15" r="1.2" fill="#2a2a2a"/>
+      <path d="M-3 -5 L 0 -2 L 3 -5 Z" fill="#2a2a2a"/>
+      <path d="M0 -2 Q -4 4 -8 0 M0 -2 Q 4 4 8 0" stroke="#2a2a2a" stroke-width="1" fill="none"/>
+      <g stroke="#2a2a2a" stroke-width=".8">
+        <path d="M-8 -2 L -28 -6"/><path d="M-8 0 L -28 1"/><path d="M-8 2 L -28 8"/>
+        <path d="M8 -2 L 28 -6"/><path d="M8 0 L 28 1"/><path d="M8 2 L 28 8"/>
+      </g>
+      <ellipse cx="-20" cy="80" rx="10" ry="6" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="1.4"/>
+      <ellipse cx="20" cy="80" rx="10" ry="6" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="1.4"/>
+      <path d="M45 60 Q 75 50 70 25 Q 65 5 45 5" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+    </g>
+
+    <!-- STONE PATH -->
+    <g filter="url(#sketch2)">
+      <g fill="#e7e3d8" stroke="#7a7a7a" stroke-width="1.6">
+        <path d="M770 800 Q 740 818 720 838 Q 740 858 770 870 Q 800 858 820 838 Q 800 818 770 800 Z"/>
+        <path d="M870 800 Q 840 818 820 838 Q 840 858 870 870 Q 900 858 920 838 Q 900 818 870 800 Z"/>
+        <path d="M720 870 Q 685 888 670 870 Q 660 850 690 838 Q 715 845 720 870 Z"/>
+        <path d="M920 870 Q 955 888 970 870 Q 980 850 950 838 Q 925 845 920 870 Z"/>
+        <path d="M820 870 Q 790 890 770 900 L 860 900 Q 840 890 820 870 Z"/>
+      </g>
+    </g>
+
+    <!-- PLANT BOX (simplified) -->
+    <g transform="translate(1200,790)" filter="url(#sketch)">
+      <path d="M0 0 L 400 0 L 380 80 L 20 80 Z" fill="#d9d2c1" stroke="#2a2a2a" stroke-width="2"/>
+      <g fill="#fbfaf6" stroke="#2a2a2a" stroke-width="1.6">
+        <g transform="translate(50,0)">
+          <path d="M0 0 Q -10 -30 -2 -55 Q 4 -25 4 0 Z"/>
+          <path d="M0 0 Q 10 -28 18 -45 Q 8 -20 8 0 Z"/>
+          <path d="M0 0 Q 18 -25 25 -38 Q 16 -16 14 0 Z"/>
+        </g>
+        <g transform="translate(170,0)">
+          <path d="M-10 0 L -10 -45 Q -10 -55 0 -55 Q 10 -55 10 -45 L 10 0 Z"/>
+        </g>
+        <g transform="translate(290,-10)">
+          <ellipse cx="0" cy="10" rx="22" ry="12"/>
+          <circle cx="18" cy="-2" r="11"/>
+          <path d="M27 -2 L 38 0 L 27 4 Z" fill="#222"/>
+          <circle cx="20" cy="-5" r="1.6" fill="#222"/>
+        </g>
+        <g transform="translate(335,0)">
+          <path d="M-8 0 L -8 -50 Q -8 -58 0 -58 Q 8 -58 8 -50 L 8 0 Z"/>
+        </g>
+      </g>
+    </g>
+  </svg>
+
+  <button class="door-zone" data-go="2" title="进入时光走廊"></button>
+
+  <div class="bottom-pill explorer">
+    <div class="pill-title">EXPLORER</div>
+    <div class="pill-text">点击门进入回忆 · Audio <span class="key" id="audioKey">[<svg width="11" height="11" viewBox="0 0 24 24" style="vertical-align:-1px"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="#222"/></svg> ON]</span></div>
+  </div>
+</section>
+
+<!-- ====================================================================== -->
+<!-- ============ SCENE 2 — 时光走廊 ===================================== -->
+<!-- ====================================================================== -->
+<section class="scene scene-2" data-scene="2">
+  <svg class="scene-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <!-- rice paper subtle texture -->
+      <radialGradient id="rice-bg" cx="50%" cy="40%" r="80%">
+        <stop offset="0%" stop-color="#f7f1e2"/>
+        <stop offset="60%" stop-color="#efe6d1"/>
+        <stop offset="100%" stop-color="#e3d6b8"/>
+      </radialGradient>
+      <filter id="ink-wet" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="3"/>
+        <feDisplacementMap in="SourceGraphic" scale="1.2"/>
+      </filter>
+      <filter id="ink-blur"><feGaussianBlur stdDeviation="0.4"/></filter>
+      <filter id="wash" x="-5%" y="-5%" width="110%" height="110%">
+        <feGaussianBlur stdDeviation="6"/>
+      </filter>
+      <!-- bamboo leaf symbol (pointed ellipse) -->
+      <symbol id="bleaf" viewBox="-30 -8 60 16">
+        <path d="M-28 0 Q -10 -7 28 0 Q -10 7 -28 0 Z" fill="#1f2a1c"/>
+      </symbol>
+      <symbol id="bleaf-soft" viewBox="-30 -8 60 16">
+        <path d="M-28 0 Q -10 -7 28 0 Q -10 7 -28 0 Z" fill="#3a4a32" opacity=".55"/>
+      </symbol>
+    </defs>
+
+    <!-- rice paper background -->
+    <rect width="1600" height="900" fill="url(#rice-bg)"/>
+
+    <!-- subtle paper grain stains -->
+    <g opacity=".18" filter="url(#wash)">
+      <ellipse cx="220" cy="180" rx="180" ry="60" fill="#c9b88b"/>
+      <ellipse cx="1380" cy="780" rx="220" ry="70" fill="#b9a878"/>
+      <ellipse cx="780" cy="500" rx="380" ry="120" fill="#d9c69a" opacity=".4"/>
+    </g>
+
+    <!-- distant mountain ink wash (山) -->
+    <g opacity=".35" filter="url(#wash)">
+      <path d="M0 620 Q 120 540 240 580 Q 360 480 500 560 Q 640 470 780 540 Q 920 480 1080 560 Q 1240 490 1400 570 Q 1520 530 1600 580 L 1600 720 L 0 720 Z"
+            fill="#5d6a5a"/>
+    </g>
+    <g opacity=".22" filter="url(#wash)">
+      <path d="M0 680 Q 200 600 420 660 Q 640 590 880 660 Q 1100 600 1320 670 Q 1480 630 1600 660 L 1600 760 L 0 760 Z"
+            fill="#3e4a3c"/>
+    </g>
+
+    <!-- ===== BACKGROUND BAMBOO (lighter, blurry, far) ===== -->
+    <g opacity=".45" filter="url(#ink-blur)">
+      <!-- bg stalks -->
+      <g stroke="#4a5a40" stroke-width="6" fill="none">
+        <path d="M180 900 Q 178 600 188 300 Q 192 150 200 0"/>
+        <path d="M340 900 Q 336 650 344 350 Q 348 180 354 0"/>
+        <path d="M1240 900 Q 1244 650 1238 350 Q 1234 170 1228 0"/>
+        <path d="M1420 900 Q 1416 600 1426 280 Q 1430 140 1438 0"/>
+      </g>
+      <!-- bg nodes -->
+      <g stroke="#2a3624" stroke-width="3" fill="none">
+        <path d="M173 760 q 7 -3 14 0"/><path d="M175 600 q 8 -3 14 0"/><path d="M180 440 q 8 -3 14 0"/><path d="M186 280 q 8 -3 14 0"/>
+        <path d="M333 760 q 7 -3 14 0"/><path d="M337 600 q 8 -3 14 0"/><path d="M341 440 q 8 -3 14 0"/><path d="M346 280 q 8 -3 14 0"/>
+        <path d="M1233 760 q 7 -3 14 0"/><path d="M1235 600 q 8 -3 14 0"/><path d="M1235 440 q 8 -3 14 0"/><path d="M1232 280 q 8 -3 14 0"/>
+        <path d="M1413 760 q 7 -3 14 0"/><path d="M1418 600 q 8 -3 14 0"/><path d="M1422 440 q 8 -3 14 0"/><path d="M1428 280 q 8 -3 14 0"/>
+      </g>
+      <!-- bg leaves clusters -->
+      <use href="#bleaf-soft" x="220" y="180" width="120" transform="rotate(-30 220 180)"/>
+      <use href="#bleaf-soft" x="180" y="200" width="110" transform="rotate(-60 180 200)"/>
+      <use href="#bleaf-soft" x="160" y="160" width="120" transform="rotate(15 160 160)"/>
+      <use href="#bleaf-soft" x="380" y="240" width="120" transform="rotate(-40 380 240)"/>
+      <use href="#bleaf-soft" x="350" y="260" width="110" transform="rotate(20 350 260)"/>
+      <use href="#bleaf-soft" x="1280" y="200" width="120" transform="rotate(40 1280 200)"/>
+      <use href="#bleaf-soft" x="1260" y="180" width="110" transform="rotate(75 1260 180)"/>
+      <use href="#bleaf-soft" x="1460" y="220" width="120" transform="rotate(50 1460 220)"/>
+      <use href="#bleaf-soft" x="1430" y="260" width="120" transform="rotate(20 1430 260)"/>
+    </g>
+
+    <!-- ===== FOREGROUND BAMBOO LEFT (dark ink) ===== -->
+    <g>
+      <!-- main stalk left -->
+      <path d="M60 900 Q 56 700 68 480 Q 74 240 84 -20" stroke="#1a2014" stroke-width="14" fill="none" filter="url(#ink-wet)"/>
+      <!-- inner highlight (paper showing through) -->
+      <path d="M60 900 Q 56 700 68 480 Q 74 240 84 -20" stroke="#4a5a40" stroke-width="3" fill="none" opacity=".5"/>
+      <!-- nodes -->
+      <g stroke="#0d1208" stroke-width="6" fill="none" filter="url(#ink-wet)">
+        <path d="M48 820 q 18 -6 30 0"/>
+        <path d="M50 700 q 18 -6 30 0"/>
+        <path d="M55 580 q 18 -6 30 0"/>
+        <path d="M60 460 q 18 -6 30 0"/>
+        <path d="M66 340 q 18 -6 30 0"/>
+        <path d="M72 220 q 18 -6 30 0"/>
+        <path d="M78 100 q 18 -6 30 0"/>
+      </g>
+      <!-- small branch from middle node -->
+      <path d="M75 460 Q 130 430 220 380" stroke="#1a2014" stroke-width="3" fill="none" filter="url(#ink-wet)"/>
+      <path d="M70 220 Q 160 200 260 170" stroke="#1a2014" stroke-width="3" fill="none" filter="url(#ink-wet)"/>
+      <!-- leaves -->
+      <use href="#bleaf" x="220" y="380" width="100" transform="rotate(-15 220 380)"/>
+      <use href="#bleaf" x="240" y="400" width="110" transform="rotate(20 240 400)"/>
+      <use href="#bleaf" x="200" y="350" width="90"  transform="rotate(-45 200 350)"/>
+      <use href="#bleaf" x="170" y="430" width="100" transform="rotate(40 170 430)"/>
+      <use href="#bleaf" x="260" y="170" width="110" transform="rotate(-25 260 170)"/>
+      <use href="#bleaf" x="280" y="190" width="120" transform="rotate(10 280 190)"/>
+      <use href="#bleaf" x="240" y="130" width="100" transform="rotate(-60 240 130)"/>
+      <use href="#bleaf" x="220" y="200" width="90"  transform="rotate(50 220 200)"/>
+    </g>
+
+    <!-- ===== FOREGROUND BAMBOO LEFT 2nd stalk ===== -->
+    <g>
+      <path d="M210 900 Q 206 720 216 520 Q 222 320 230 60" stroke="#1a2014" stroke-width="10" fill="none" filter="url(#ink-wet)"/>
+      <path d="M210 900 Q 206 720 216 520 Q 222 320 230 60" stroke="#4a5a40" stroke-width="2" fill="none" opacity=".5"/>
+      <g stroke="#0d1208" stroke-width="5" fill="none" filter="url(#ink-wet)">
+        <path d="M201 760 q 14 -4 22 0"/>
+        <path d="M204 620 q 14 -4 22 0"/>
+        <path d="M208 480 q 14 -4 22 0"/>
+        <path d="M213 340 q 14 -4 22 0"/>
+        <path d="M218 200 q 14 -4 22 0"/>
+      </g>
+      <path d="M210 620 Q 150 600 80 610" stroke="#1a2014" stroke-width="2.5" fill="none" filter="url(#ink-wet)"/>
+      <use href="#bleaf" x="80" y="610" width="90"  transform="rotate(170 80 610)"/>
+      <use href="#bleaf" x="60" y="630" width="100" transform="rotate(200 60 630)"/>
+      <use href="#bleaf" x="100" y="590" width="80" transform="rotate(150 100 590)"/>
+    </g>
+
+    <!-- ===== FOREGROUND BAMBOO RIGHT ===== -->
+    <g>
+      <path d="M1530 900 Q 1536 700 1524 480 Q 1518 240 1510 -20" stroke="#1a2014" stroke-width="14" fill="none" filter="url(#ink-wet)"/>
+      <path d="M1530 900 Q 1536 700 1524 480 Q 1518 240 1510 -20" stroke="#4a5a40" stroke-width="3" fill="none" opacity=".5"/>
+      <g stroke="#0d1208" stroke-width="6" fill="none" filter="url(#ink-wet)">
+        <path d="M1518 820 q 18 -6 30 0"/>
+        <path d="M1516 700 q 18 -6 30 0"/>
+        <path d="M1521 580 q 18 -6 30 0"/>
+        <path d="M1518 460 q 18 -6 30 0"/>
+        <path d="M1514 340 q 18 -6 30 0"/>
+        <path d="M1510 220 q 18 -6 30 0"/>
+        <path d="M1505 100 q 18 -6 30 0"/>
+      </g>
+      <path d="M1520 460 Q 1450 430 1370 400" stroke="#1a2014" stroke-width="3" fill="none" filter="url(#ink-wet)"/>
+      <path d="M1515 220 Q 1420 200 1330 180" stroke="#1a2014" stroke-width="3" fill="none" filter="url(#ink-wet)"/>
+      <use href="#bleaf" x="1370" y="400" width="110" transform="rotate(195 1370 400)"/>
+      <use href="#bleaf" x="1340" y="420" width="100" transform="rotate(220 1340 420)"/>
+      <use href="#bleaf" x="1400" y="370" width="90"  transform="rotate(160 1400 370)"/>
+      <use href="#bleaf" x="1430" y="450" width="100" transform="rotate(135 1430 450)"/>
+      <use href="#bleaf" x="1330" y="180" width="110" transform="rotate(205 1330 180)"/>
+      <use href="#bleaf" x="1310" y="200" width="120" transform="rotate(170 1310 200)"/>
+      <use href="#bleaf" x="1350" y="140" width="100" transform="rotate(240 1350 140)"/>
+      <use href="#bleaf" x="1380" y="210" width="90"  transform="rotate(130 1380 210)"/>
+    </g>
+
+    <!-- ===== FOREGROUND BAMBOO RIGHT 2nd stalk ===== -->
+    <g>
+      <path d="M1390 900 Q 1394 720 1384 520 Q 1378 320 1370 60" stroke="#1a2014" stroke-width="10" fill="none" filter="url(#ink-wet)"/>
+      <path d="M1390 900 Q 1394 720 1384 520 Q 1378 320 1370 60" stroke="#4a5a40" stroke-width="2" fill="none" opacity=".5"/>
+      <g stroke="#0d1208" stroke-width="5" fill="none" filter="url(#ink-wet)">
+        <path d="M1378 760 q 14 -4 22 0"/>
+        <path d="M1381 620 q 14 -4 22 0"/>
+        <path d="M1385 480 q 14 -4 22 0"/>
+        <path d="M1380 340 q 14 -4 22 0"/>
+        <path d="M1374 200 q 14 -4 22 0"/>
+      </g>
+      <path d="M1390 620 Q 1460 600 1530 610" stroke="#1a2014" stroke-width="2.5" fill="none" filter="url(#ink-wet)"/>
+      <use href="#bleaf" x="1530" y="610" width="90"  transform="rotate(-10 1530 610)"/>
+      <use href="#bleaf" x="1550" y="630" width="100" transform="rotate(20 1550 630)"/>
+      <use href="#bleaf" x="1510" y="590" width="80"  transform="rotate(-30 1510 590)"/>
+    </g>
+
+    <!-- floating ink leaves drifting -->
+    <g opacity=".7">
+      <use href="#bleaf-soft" x="500" y="120" width="50" transform="rotate(25 500 120)"/>
+      <use href="#bleaf-soft" x="900" y="80" width="55" transform="rotate(-15 900 80)"/>
+      <use href="#bleaf-soft" x="1100" y="140" width="48" transform="rotate(40 1100 140)"/>
+      <use href="#bleaf-soft" x="650" y="780" width="50" transform="rotate(-25 650 780)"/>
+      <use href="#bleaf-soft" x="980" y="820" width="55" transform="rotate(30 980 820)"/>
+    </g>
+
+    <!-- ===== TITLE: vertical Chinese-painting style at center top ===== -->
+    <!-- horizontal wash backing strip behind title (subtle) -->
+    <g opacity=".55">
+      <rect x="640" y="200" width="320" height="80" fill="#f7f1e2" stroke="#2a2418" stroke-width="1.4" filter="url(#ink-wet)"/>
+    </g>
+    <text x="800" y="252" text-anchor="middle"
+          font-family="'ZCOOL KuaiLe','Long Cang','STKaiti','KaiTi',serif"
+          font-weight="700" font-size="40" fill="#1a1a14" letter-spacing="14">流  光  四  年</text>
+
+    <!-- red seal 印章 bottom-right -->
+    <g transform="translate(1430 820) rotate(-3)">
+      <rect x="-30" y="-30" width="60" height="60" fill="#b8341e" filter="url(#ink-wet)" rx="2"/>
+      <text x="0" y="2" text-anchor="middle" dominant-baseline="middle"
+            font-family="'ZCOOL KuaiLe','STKaiti','KaiTi',serif"
+            font-weight="700" font-size="20" fill="#f7f1e2" letter-spacing="2">纪念</text>
+    </g>
+    <!-- small subtitle in calligraphy beside seal -->
+    <text x="1410" y="780" text-anchor="end"
+          font-family="'Long Cang','STKaiti','KaiTi',cursive"
+          font-size="22" fill="#3a3024" letter-spacing="4" opacity=".75">二〇二六 · 毕业纪念</text>
+  </svg>
+
+  <!-- horizontal photo marquee (unchanged structure) -->
+  <div class="film-strip">
+    <svg class="film-rail" viewBox="0 0 1600 20" preserveAspectRatio="none">
+      <path d="M0 12 Q 400 4 800 12 T 1600 12" stroke="#2a2a2a" stroke-width="1.4" fill="none" filter="url(#sketch2)"/>
+    </svg>
+
+    <div class="film-track">
+<!-- 12 polaroid placeholders, duplicated for seamless loop -->
+      <!-- SET A -->
+      <div class="polaroid p1" style="--rot:-3deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="1"><span class="slot-hint">PHOTO 01</span></div>
+        <div class="poly-cap">军训 · 2022 秋</div>
+      </div>
+      <div class="polaroid p2" style="--rot:4deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="2"><span class="slot-hint">PHOTO 02</span></div>
+        <div class="poly-cap">开学第一天</div>
+      </div>
+      <div class="polaroid p3" style="--rot:-2deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="3"><span class="slot-hint">PHOTO 03</span></div>
+        <div class="poly-cap">宿舍夜话</div>
+      </div>
+      <div class="polaroid p4" style="--rot:3deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="4"><span class="slot-hint">PHOTO 04</span></div>
+        <div class="poly-cap">第一次班级聚餐</div>
+      </div>
+      <div class="polaroid p5" style="--rot:-4deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="5"><span class="slot-hint">PHOTO 05</span></div>
+        <div class="poly-cap">运动会</div>
+      </div>
+      <div class="polaroid p6" style="--rot:2deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="6"><span class="slot-hint">PHOTO 06</span></div>
+        <div class="poly-cap">图书馆通宵</div>
+      </div>
+      <div class="polaroid p7" style="--rot:-3deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="7"><span class="slot-hint">PHOTO 07</span></div>
+        <div class="poly-cap">期末后的烧烤</div>
+      </div>
+      <div class="polaroid p8" style="--rot:5deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="8"><span class="slot-hint">PHOTO 08</span></div>
+        <div class="poly-cap">大三的那次旅行</div>
+      </div>
+      <div class="polaroid p9" style="--rot:-2deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="9"><span class="slot-hint">PHOTO 09</span></div>
+        <div class="poly-cap">实习路上</div>
+      </div>
+      <div class="polaroid p10" style="--rot:3deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="10"><span class="slot-hint">PHOTO 10</span></div>
+        <div class="poly-cap">答辩前夜</div>
+      </div>
+      <div class="polaroid p11" style="--rot:-4deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="11"><span class="slot-hint">PHOTO 11</span></div>
+        <div class="poly-cap">最后一次班会</div>
+      </div>
+      <div class="polaroid p12" style="--rot:2deg">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="12"><span class="slot-hint">PHOTO 12</span></div>
+        <div class="poly-cap">毕业典礼</div>
+      </div>
+
+      <!-- SET B (duplicate for seamless loop) -->
+      <div class="polaroid p1" style="--rot:-3deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="1"><span class="slot-hint">PHOTO 01</span></div>
+        <div class="poly-cap">军训 · 2022 秋</div>
+      </div>
+      <div class="polaroid p2" style="--rot:4deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="2"><span class="slot-hint">PHOTO 02</span></div>
+        <div class="poly-cap">开学第一天</div>
+      </div>
+      <div class="polaroid p3" style="--rot:-2deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="3"><span class="slot-hint">PHOTO 03</span></div>
+        <div class="poly-cap">宿舍夜话</div>
+      </div>
+      <div class="polaroid p4" style="--rot:3deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="4"><span class="slot-hint">PHOTO 04</span></div>
+        <div class="poly-cap">第一次班级聚餐</div>
+      </div>
+      <div class="polaroid p5" style="--rot:-4deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="5"><span class="slot-hint">PHOTO 05</span></div>
+        <div class="poly-cap">运动会</div>
+      </div>
+      <div class="polaroid p6" style="--rot:2deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="6"><span class="slot-hint">PHOTO 06</span></div>
+        <div class="poly-cap">图书馆通宵</div>
+      </div>
+      <div class="polaroid p7" style="--rot:-3deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="7"><span class="slot-hint">PHOTO 07</span></div>
+        <div class="poly-cap">期末后的烧烤</div>
+      </div>
+      <div class="polaroid p8" style="--rot:5deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="8"><span class="slot-hint">PHOTO 08</span></div>
+        <div class="poly-cap">大三的那次旅行</div>
+      </div>
+      <div class="polaroid p9" style="--rot:-2deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="9"><span class="slot-hint">PHOTO 09</span></div>
+        <div class="poly-cap">实习路上</div>
+      </div>
+      <div class="polaroid p10" style="--rot:3deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="10"><span class="slot-hint">PHOTO 10</span></div>
+        <div class="poly-cap">答辩前夜</div>
+      </div>
+      <div class="polaroid p11" style="--rot:-4deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="11"><span class="slot-hint">PHOTO 11</span></div>
+        <div class="poly-cap">最后一次班会</div>
+      </div>
+      <div class="polaroid p12" style="--rot:2deg" aria-hidden="true">
+        <div class="poly-pin"></div>
+        <div class="poly-photo" data-slot="12"><span class="slot-hint">PHOTO 12</span></div>
+        <div class="poly-cap">毕业典礼</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-pill wanderer">
+    <div class="pill-title">FILMSTRIP</div>
+    <div class="pill-text">照片自动从左向右滑过 · 鼠标悬停可暂停 · 后续替换占位框</div>
+  </div>
+
+  <button class="back-arrow" data-go="1">←</button>
+</section>
+
+
+<!-- ====================================================================== -->
+<!-- ============ SCENE 3 — 主题相册（TV + 6 categories） ================ -->
+<!-- ====================================================================== -->
+<section class="scene scene-3" data-scene="3">
+  <svg class="scene-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <rect width="1600" height="900" fill="#7a7a7a"/>
+    <defs>
+      <radialGradient id="spot3" cx="35%" cy="50%" r="48%">
+        <stop offset="0%" stop-color="#ffffff" stop-opacity=".95"/>
+        <stop offset="55%" stop-color="#cfcfcf" stop-opacity=".3"/>
+        <stop offset="100%" stop-color="#1f1f1f" stop-opacity=".8"/>
+      </radialGradient>
+    </defs>
+    <rect width="1600" height="900" fill="url(#spot3)"/>
+
+    <!-- TV body -->
+    <g transform="translate(220,210)" filter="url(#sketch)">
+      <rect x="0" y="0" width="780" height="540" rx="16" fill="#f0ece2" stroke="#2a2a2a" stroke-width="3"/>
+      <rect x="14" y="14" width="752" height="512" rx="12" fill="none" stroke="#2a2a2a" stroke-width="1.4"/>
+      <rect x="60" y="50" width="560" height="420" rx="22" fill="#fdfcf6" stroke="#2a2a2a" stroke-width="2.4"/>
+      <ellipse cx="200" cy="120" rx="120" ry="50" fill="#fff" opacity=".5"/>
+
+      <!-- knobs panel -->
+      <g transform="translate(650,60)">
+        <circle cx="40" cy="40" r="36" fill="#f0ece2" stroke="#2a2a2a" stroke-width="2"/>
+        <circle cx="40" cy="40" r="26" fill="none" stroke="#2a2a2a" stroke-width="1.2"/>
+        <path d="M40 40 L 56 28" stroke="#2a2a2a" stroke-width="2.4"/>
+        <circle cx="40" cy="150" r="36" fill="#f0ece2" stroke="#2a2a2a" stroke-width="2"/>
+        <path d="M40 150 L 24 162" stroke="#2a2a2a" stroke-width="2.4"/>
+        <g fill="none" stroke="#2a2a2a" stroke-width="1.4">
+          <rect x="6" y="260" width="14" height="10" rx="2"/>
+          <rect x="24" y="260" width="14" height="10" rx="2"/>
+          <rect x="42" y="260" width="14" height="10" rx="2"/>
+          <rect x="60" y="260" width="14" height="10" rx="2"/>
+        </g>
+        <g stroke="#2a2a2a" stroke-width="1.2">
+          <path d="M0 295 L 80 295"/><path d="M0 305 L 80 305"/><path d="M0 315 L 80 315"/>
+          <path d="M0 325 L 80 325"/><path d="M0 335 L 80 335"/><path d="M0 345 L 80 345"/>
+          <path d="M0 355 L 80 355"/><path d="M0 365 L 80 365"/><path d="M0 375 L 80 375"/>
+          <path d="M0 385 L 80 385"/>
+        </g>
+      </g>
+      <path d="M40 540 L 80 560 L 60 560 Z" fill="#2a2a2a"/>
+      <path d="M740 540 L 700 560 L 720 560 Z" fill="#2a2a2a"/>
+    </g>
+
+    <!-- screen content: album category grid -->
+    <g transform="translate(290,270)">
+      <text x="280" y="34" text-anchor="middle" font-family="'ZCOOL KuaiLe','Caveat',cursive"
+            font-weight="700" font-size="34" fill="#fdfcf6" stroke="#1a1a1a"
+            stroke-width="1.6" paint-order="stroke fill" style="letter-spacing:4px">小Z 的时光相册</text>
+      <line x1="60" y1="50" x2="500" y2="50" stroke="#aaa" stroke-dasharray="4,3" stroke-width="1"/>
+
+      <!-- 6 thumbnails (clickable via foreignObject? use button overlays) -->
+      <g font-family="'ZCOOL KuaiLe',serif" font-size="14" fill="#2a2a2a">
+        <!-- row 1 -->
+        <g transform="translate(40,80)" class="cat-thumb" data-cat="0">
+          <rect width="150" height="100" fill="#fbfaf4" stroke="#2a2a2a" stroke-width="1.6"/>
+          <g transform="translate(58,28)" stroke="#2a2a2a" stroke-width="1.4" fill="none">
+            <rect x="-12" y="0" width="24" height="24"/>
+            <path d="M-18 28 L 18 28 L 14 38 L -14 38 Z"/>
+            <path d="M0 -8 L 0 0"/>
+          </g>
+          <text x="75" y="86" text-anchor="middle" font-weight="700">军 训</text>
+        </g>
+        <g transform="translate(210,80)" class="cat-thumb" data-cat="1">
+          <rect width="150" height="100" fill="#fbfaf4" stroke="#2a2a2a" stroke-width="1.6"/>
+          <g transform="translate(75,30)" stroke="#2a2a2a" stroke-width="1.4" fill="none">
+            <rect x="-22" y="-10" width="44" height="28"/>
+            <path d="M-10 -4 L 10 -4 M -10 4 L 10 4 M -10 12 L 6 12"/>
+          </g>
+          <text x="75" y="86" text-anchor="middle" font-weight="700">教 室</text>
+        </g>
+        <g transform="translate(380,80)" class="cat-thumb" data-cat="2">
+          <rect width="150" height="100" fill="#fbfaf4" stroke="#2a2a2a" stroke-width="1.6"/>
+          <g transform="translate(75,32)" stroke="#2a2a2a" stroke-width="1.4" fill="none">
+            <circle r="14"/><path d="M-10 -4 q 4 4 8 0 M 4 -4 q 4 4 8 0 M -6 4 q 6 6 12 0"/>
+          </g>
+          <text x="75" y="86" text-anchor="middle" font-weight="700">聚 餐</text>
+        </g>
+        <!-- row 2 -->
+        <g transform="translate(40,200)" class="cat-thumb" data-cat="3">
+          <rect width="150" height="100" fill="#fbfaf4" stroke="#2a2a2a" stroke-width="1.6"/>
+          <g transform="translate(75,32)" stroke="#2a2a2a" stroke-width="1.4" fill="none">
+            <path d="M-30 8 L -10 -12 L 0 -2 L 14 -16 L 30 8 Z"/>
+            <circle cx="-12" cy="-18" r="4"/>
+          </g>
+          <text x="75" y="86" text-anchor="middle" font-weight="700">旅 行</text>
+        </g>
+        <g transform="translate(210,200)" class="cat-thumb" data-cat="4">
+          <rect width="150" height="100" fill="#fbfaf4" stroke="#2a2a2a" stroke-width="1.6"/>
+          <g transform="translate(75,32)" stroke="#2a2a2a" stroke-width="1.4" fill="none">
+            <circle r="16"/>
+            <path d="M-16 0 L 16 0 M 0 -16 L 0 16 M -12 -10 Q 0 0 12 -10 M -12 10 Q 0 0 12 10"/>
+          </g>
+          <text x="75" y="86" text-anchor="middle" font-weight="700">比 赛</text>
+        </g>
+        <g transform="translate(380,200)" class="cat-thumb" data-cat="5">
+          <rect width="150" height="100" fill="#fbfaf4" stroke="#2a2a2a" stroke-width="1.6"/>
+          <g transform="translate(75,32)">
+            <use href="#gradCap" width="60" height="44" x="-30" y="-22"/>
+          </g>
+          <text x="75" y="86" text-anchor="middle" font-weight="700">毕业典礼</text>
+        </g>
+      </g>
+    </g>
+
+    <!-- clickable hotspot overlays for thumbnails (HTML buttons handled via .thumb-zone) -->
+  </svg>
+
+  <!-- HTML overlay buttons over each thumbnail (positioned relative to scene) -->
+  <div class="thumb-overlay">
+    <button class="thumb-zone" style="left:21.0%;top:38.7%;width:9.5%;height:11.5%" data-cat="0" title="军训"></button>
+    <button class="thumb-zone" style="left:31.7%;top:38.7%;width:9.5%;height:11.5%" data-cat="1" title="教室"></button>
+    <button class="thumb-zone" style="left:42.3%;top:38.7%;width:9.5%;height:11.5%" data-cat="2" title="聚餐"></button>
+    <button class="thumb-zone" style="left:21.0%;top:52.0%;width:9.5%;height:11.5%" data-cat="3" title="旅行"></button>
+    <button class="thumb-zone" style="left:31.7%;top:52.0%;width:9.5%;height:11.5%" data-cat="4" title="比赛"></button>
+    <button class="thumb-zone" style="left:42.3%;top:52.0%;width:9.5%;height:11.5%" data-cat="5" title="毕业典礼"></button>
+  </div>
+
+  <!-- ====== STORY PAPER CARD on right (changes content per category) ====== -->
+  <div class="paper-card story-card" id="storyCard">
+    <button class="close-x" id="closeCard" title="返回">×</button>
+    <div class="cat-label" id="storyLabel">相册</div>
+    <h1 class="card-title" id="storyTitle">点左侧任意分类</h1>
+    <div class="card-meta">
+      <span id="storyDate">2022 — 2026</span>
+      <span class="dot-sep"></span>
+      <span id="storyCount">共 0 张</span>
+    </div>
+    <div class="card-divider"></div>
+    <p class="card-body" id="storyBody">
+      左边电视里有六个分类。点一个进去翻翻。每一张照片背后，都是我们一起走过的一段路。
+    </p>
+
+    <!-- photo strip (placeholders) -->
+    <div class="photo-strip" id="photoStrip">
+      <svg viewBox="0 0 100 80" class="photo-th"><use href="#photoPH"/></svg>
+      <svg viewBox="0 0 100 80" class="photo-th"><use href="#photoPH"/></svg>
+      <svg viewBox="0 0 100 80" class="photo-th"><use href="#photoPH"/></svg>
+      <svg viewBox="0 0 100 80" class="photo-th"><use href="#photoPH"/></svg>
+    </div>
+
+    <a class="open-link" href="#" id="openLink">
+      打开校园地图 <span class="arr">↗</span>
+    </a>
+  </div>
+
+  <button class="back-arrow" data-go="2">←</button>
+</section>
+
+<!-- ====================================================================== -->
+<!-- ============ SCENE 4 — 校园地图（带可点亮地点） ===================== -->
+<!-- ====================================================================== -->
+<section class="scene scene-4" data-scene="4">
+  <svg class="scene-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <!-- background image -->
+    <image href="bg4.png?v=23" x="0" y="0" width="1600" height="900" preserveAspectRatio="xMidYMid slice"/>
+
+    <!-- hotspots overlay (warm pins) -->
+    <g id="hotspots">
+      <!-- 操场 (stadium oval, far left) -->
+      <g class="hs hs-light" data-place="3" transform="translate(230,560)">
+        <circle r="30" fill="#ffb347" opacity=".35" class="ring"/>
+        <circle r="14" fill="#fff5d6" stroke="#a02828" stroke-width="2.2"/>
+        <text y="5" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="12" font-weight="700" fill="#a02828">操场</text>
+      </g>
+
+      <!-- 教室 (left wing, lower-left of tower) -->
+      <g class="hs hs-light" data-place="1" transform="translate(620,720)">
+        <circle r="30" fill="#ffb347" opacity=".35" class="ring"/>
+        <circle r="14" fill="#fff5d6" stroke="#a02828" stroke-width="2.2"/>
+        <text y="5" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="12" font-weight="700" fill="#a02828">教室</text>
+      </g>
+
+      <!-- 图书馆 (central tower with glass dome) -->
+      <g class="hs hs-light" data-place="2" transform="translate(800,500)">
+        <circle r="36" fill="#ffb347" opacity=".4" class="ring"/>
+        <circle r="17" fill="#fff5d6" stroke="#a02828" stroke-width="2.4"/>
+        <text y="5" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="11" font-weight="700" fill="#a02828">图书馆</text>
+      </g>
+
+      <!-- 宿舍 (right wing) -->
+      <g class="hs hs-light" data-place="4" transform="translate(1070,760)">
+        <circle r="30" fill="#ffb347" opacity=".35" class="ring"/>
+        <circle r="14" fill="#fff5d6" stroke="#a02828" stroke-width="2.2"/>
+        <text y="5" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="12" font-weight="700" fill="#a02828">宿舍</text>
+      </g>
+
+      <!-- 食堂 (round auditorium far right) -->
+      <g class="hs hs-light" data-place="0" transform="translate(1480,780)">
+        <circle r="30" fill="#ffb347" opacity=".35" class="ring"/>
+        <circle r="14" fill="#fff5d6" stroke="#a02828" stroke-width="2.2"/>
+        <text y="5" text-anchor="middle" font-family="'ZCOOL KuaiLe',serif" font-size="12" font-weight="700" fill="#a02828">食堂</text>
+      </g>
+    </g>
+  </svg>
+
+  <!-- tooltip card -->
+  <div class="place-tip" id="placeTip" hidden>
+    <button class="close-x" id="placeClose">×</button>
+    <div class="cat-label" id="placeLabel">校园地点</div>
+    <h3 class="place-title" id="placeTitle">食堂</h3>
+    <p class="card-body" id="placeBody">在这里吃过的每一顿饭，都是一段无言的陪伴。</p>
+  </div>
+
+  <div class="bottom-pill explorer">
+    <div class="pill-title">EXPLORER</div>
+    <div class="pill-text">点亮任意黄圈 · 听这里的故事</div>
+  </div>
+
+  <button class="back-arrow" data-go="3">←</button>
+</section>
+
+<!-- ====================================================================== -->
+<!-- ============ SCENE 5 — 留言寄语墙 =================================== -->
+<!-- ====================================================================== -->
+<section class="scene scene-5" data-scene="5">
+  <svg class="scene-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <!-- brick wall + ground (same as scene 1) -->
+    <rect x="0" y="0" width="1600" height="720" fill="url(#brick)"/>
+    <rect x="0" y="720" width="1600" height="180" fill="url(#ground)"/>
+
+    <!-- bunting flags (same as scene 1) -->
+    <g filter="url(#sketch2)">
+      <path d="M120 80 Q 800 140 1480 80" stroke="#2a2a2a" stroke-width="1.2" fill="none"/>
+      <g stroke="#2a2a2a" stroke-width="1.4" fill="#fbfaf6">
+        <path d="M200 90 L 220 90 L 210 112 Z"/><path d="M280 100 L 300 100 L 290 122 Z"/>
+        <path d="M360 108 L 380 108 L 370 130 Z"/><path d="M440 116 L 460 116 L 450 138 Z"/>
+        <path d="M520 122 L 540 122 L 530 144 Z"/><path d="M600 126 L 620 126 L 610 148 Z"/>
+        <path d="M680 130 L 700 130 L 690 152 Z"/><path d="M760 132 L 780 132 L 770 154 Z"/>
+        <path d="M840 132 L 860 132 L 850 154 Z"/><path d="M920 130 L 940 130 L 930 152 Z"/>
+        <path d="M1000 126 L 1020 126 L 1010 148 Z"/><path d="M1080 122 L 1100 122 L 1090 144 Z"/>
+        <path d="M1160 116 L 1180 116 L 1170 138 Z"/><path d="M1240 108 L 1260 108 L 1250 130 Z"/>
+        <path d="M1320 100 L 1340 100 L 1330 122 Z"/><path d="M1400 90 L 1420 90 L 1410 112 Z"/>
+      </g>
+    </g>
+
+    <!-- small tree silhouette on the left (echoing scene 1) -->
+    <g filter="url(#sketch)" transform="translate(60 420) scale(.55)">
+      <path d="M380 720 C 365 600, 360 480, 365 360 C 365 320, 360 280, 350 240 L 340 200 L 330 170"
+            fill="none" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M380 720 C 395 620, 400 500, 395 380 L 405 320 L 415 280 L 425 240 L 432 210"
+            fill="none" stroke="#2a2a2a" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M395 380 C 350 360, 300 340, 260 320" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M395 380 C 460 365, 510 350, 555 330" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M380 310 C 420 290, 460 270, 510 260" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M370 280 C 330 270, 290 260, 250 250" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <g fill="#fafafa" stroke="#2a2a2a" stroke-width="2">
+        <path d="M260 130 q -15 -30 25 -40 q 5 -25 40 -20 q 20 -20 45 -5 q 35 -5 40 25 q 25 10 15 40 q 15 25 -20 35 q -5 30 -40 20 q -25 15 -45 -5 q -35 5 -40 -25 q -25 -5 -20 -25 z"/>
+        <path d="M380 200 q -15 -25 20 -35 q 5 -20 35 -15 q 20 -15 40 0 q 30 -5 30 25 q 20 5 10 30 q 10 20 -20 25 q -5 25 -35 15 q -20 10 -35 -5 q -30 0 -30 -20 q -20 -5 -15 -20 z"/>
+      </g>
+    </g>
+
+    <!-- small potted plant lower right (echoing scene 1 style) -->
+    <g filter="url(#sketch)" transform="translate(1380 620)">
+      <path d="M0 60 L 80 60 L 70 110 L 10 110 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M-2 60 L 82 60" stroke="#2a2a2a" stroke-width="2"/>
+      <g fill="none" stroke="#2a2a2a" stroke-width="1.8">
+        <path d="M20 60 Q 10 30 0 10"/>
+        <path d="M30 60 Q 30 25 25 -5"/>
+        <path d="M40 60 Q 45 20 60 -10"/>
+        <path d="M50 60 Q 60 30 75 15"/>
+        <path d="M60 60 Q 70 35 85 25"/>
+      </g>
+      <g fill="#fafafa" stroke="#2a2a2a" stroke-width="1.6">
+        <path d="M-8 5 q -4 -10 8 -12 q 4 -8 12 -4 q 8 -4 10 6 q 8 4 2 12 q 4 8 -8 8 q -4 8 -12 0 q -10 0 -12 -10 z"/>
+        <path d="M60 -18 q -3 -8 6 -10 q 4 -6 10 -2 q 6 -2 8 4 q 6 4 0 10 q 4 6 -6 8 q -4 6 -10 0 q -8 0 -8 -10 z"/>
+        <path d="M80 18 q -3 -8 6 -10 q 4 -6 10 -2 q 6 -2 8 4 q 6 4 0 10 q 4 6 -6 8 q -4 6 -10 0 q -8 0 -8 -10 z"/>
+      </g>
+    </g>
+
+    <!-- hand-drawn title ribbon (banner across center top) -->
+    <g filter="url(#sketch2)">
+      <path d="M540 195 L 1060 195 L 1050 260 L 550 260 Z"
+            fill="#fbfaf6" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M540 195 L 510 227 L 540 260 Z"
+            fill="#e8e2cf" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M1060 195 L 1090 227 L 1060 260 Z"
+            fill="#e8e2cf" stroke="#2a2a2a" stroke-width="2"/>
+      <!-- inner double-line -->
+      <path d="M552 207 L 1048 207" stroke="#2a2a2a" stroke-width=".8" fill="none" opacity=".5"/>
+      <path d="M552 248 L 1048 248" stroke="#2a2a2a" stroke-width=".8" fill="none" opacity=".5"/>
+    </g>
+    <text x="800" y="240" text-anchor="middle"
+          font-family="'ZCOOL KuaiLe','Long Cang',cursive" font-weight="700" font-size="38"
+          fill="#222" letter-spacing="6">写 给 小 Z 的 话</text>
+
+    <!-- tiny pencil decoration left of title -->
+    <g filter="url(#sketch2)" transform="translate(450 215)">
+      <path d="M0 18 L 60 18 L 70 8 L 60 -2 L 0 -2 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="1.6"/>
+      <path d="M70 8 L 78 8 L 82 12 L 78 16 L 70 16 Z" fill="#e9b86c" stroke="#2a2a2a" stroke-width="1.4"/>
+      <path d="M82 12 L 92 8 L 92 16 Z" fill="#2a2a2a"/>
+      <path d="M8 8 L 56 8" stroke="#2a2a2a" stroke-width=".8" opacity=".4"/>
+    </g>
+    <g filter="url(#sketch2)" transform="translate(1080 215) scale(-1,1)">
+      <path d="M0 18 L 60 18 L 70 8 L 60 -2 L 0 -2 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="1.6"/>
+      <path d="M70 8 L 78 8 L 82 12 L 78 16 L 70 16 Z" fill="#e9b86c" stroke="#2a2a2a" stroke-width="1.4"/>
+      <path d="M82 12 L 92 8 L 92 16 Z" fill="#2a2a2a"/>
+      <path d="M8 8 L 56 8" stroke="#2a2a2a" stroke-width=".8" opacity=".4"/>
+    </g>
+  </svg>
+
+  <!-- HTML paper notes overlay -->
+  <div class="notes-wall">
+    <div class="sticky n1" style="top:32%;left:6%;--rot:-4deg;--bg:#fbfaf6">
+      <div class="tape"></div>
+      <p>大一第一次见你那个晚上，你抱着一摞书从图书馆出来，路灯把你的影子拉得很长。我那时候就觉得，这个人会陪我走过四年。</p>
+      <div class="sig">—— 兼祺</div>
+    </div>
+
+    <div class="sticky n2" style="top:30%;left:32%;--rot:3deg;--bg:#fbf2e0">
+      <div class="tape"></div>
+      <p>谢谢你陪我熬过那次答辩，谢谢你陪我吃过 200 顿食堂，谢谢你听我抱怨过那么多次。</p>
+      <div class="sig">—— 你的舍友</div>
+    </div>
+
+    <div class="sticky n3" style="top:33%;left:58%;--rot:-2deg;--bg:#f4ede0">
+      <div class="tape"></div>
+      <p>记得我们在篮球场打到天黑那次吗？你三分球进的时候我以为自己听到了整个青春的回响。</p>
+      <div class="sig">—— 球场上的人</div>
+    </div>
+
+    <div class="sticky n4" style="top:55%;left:6%;--rot:5deg;--bg:#f0f0e6">
+      <div class="tape"></div>
+      <p>你在我面前哭过，也在我面前笑得最大声。我都记得。以后不管走多远，记得回头看看，我都在。</p>
+      <div class="sig">—— 老朋友</div>
+    </div>
+
+    <div class="sticky n5" style="top:56%;left:32%;--rot:-3deg;--bg:#fbfaf6">
+      <div class="tape"></div>
+      <p>四年里我们一起跷过一节课，一起追过一场电影的首映，一起在凌晨四点的操场上看过一次日出。这些事情写下来很短，可一辈子大概也就这么几次。</p>
+      <div class="sig">—— 同行人</div>
+    </div>
+
+    <div class="sticky n6" style="top:55%;left:58%;--rot:4deg;--bg:#f7ece4">
+      <div class="tape"></div>
+      <p>谢谢你在我最不像自己的时候，依然没有把我当陌生人。</p>
+      <div class="sig">—— 永远的同桌</div>
+    </div>
+
+    <div class="sticky n7" style="top:78%;left:18%;--rot:-5deg;--bg:#fbf2e0">
+      <div class="tape"></div>
+      <p>毕业不是再见，是说"下次见面别迟到"。</p>
+      <div class="sig">—— 等你回母校的那个人</div>
+    </div>
+
+    <div class="sticky n8" style="top:79%;left:48%;--rot:2deg;--bg:#fbfaf6">
+      <div class="tape"></div>
+      <p>愿你以后挣的工资，能配得上你熬过的夜。愿你以后遇见的人，都不辜负你的真诚。</p>
+      <div class="sig">—— 祝福你的人很多</div>
+    </div>
+  </div>
+
+  <div class="bottom-pill explorer">
+    <div class="pill-title">MESSAGES</div>
+    <div class="pill-text">每一张纸条都是真心 · 双击便签可让它"暂时高亮"</div>
+  </div>
+
+  <button class="back-arrow" data-go="4">←</button>
+</section>
+
+<!-- ====================================================================== -->
+<!-- ============ SCENE 6 — 时间线（大一 → 大四） ======================== -->
+<!-- ====================================================================== -->
+<section class="scene scene-6" data-scene="6">
+  <svg class="scene-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <!-- aged rice paper gradient -->
+      <radialGradient id="s6-paper" cx="50%" cy="35%" r="80%">
+        <stop offset="0%" stop-color="#f7efd6"/>
+        <stop offset="55%" stop-color="#eee2bf"/>
+        <stop offset="100%" stop-color="#dfcf9a"/>
+      </radialGradient>
+      <!-- wet-brush filter -->
+      <filter id="s6-wet" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="6"/>
+        <feDisplacementMap in="SourceGraphic" scale="1.5"/>
+      </filter>
+      <filter id="s6-mist" x="-10%" y="-10%" width="120%" height="120%">
+        <feGaussianBlur stdDeviation="14"/>
+      </filter>
+      <filter id="s6-soft" x="-5%" y="-5%" width="110%" height="110%">
+        <feGaussianBlur stdDeviation="4"/>
+      </filter>
+      <!-- pine cluster symbol (small) -->
+      <symbol id="pine-mini" viewBox="-12 -28 24 30">
+        <path d="M0 0 L 0 -22" stroke="#1a1a14" stroke-width="1.2"/>
+        <path d="M-10 -4 L 0 -12 L 10 -4 M -8 -10 L 0 -18 L 8 -10 M -6 -16 L 0 -22 L 6 -16"
+              fill="none" stroke="#1a2014" stroke-width="1.4"/>
+      </symbol>
+      <!-- crane (very small) -->
+            <!-- aged pine (layered horizontal foliage 古松) -->
+      <symbol id="pine-aged" viewBox="-22 -56 44 60">
+        <!-- curved trunk -->
+        <path d="M0 2 C -4 -12 6 -22 0 -36 L 2 -50" stroke="#1a1a14" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <!-- small branch right -->
+        <path d="M0 -22 q 8 -4 14 -10" stroke="#1a1a14" stroke-width="1.4" fill="none"/>
+        <!-- horizontal foliage layers -->
+        <ellipse cx="-3" cy="-14" rx="16" ry="3" fill="#1a2014"/>
+        <ellipse cx="4" cy="-25" rx="14" ry="3" fill="#1a2014"/>
+        <ellipse cx="-2" cy="-36" rx="11" ry="2.6" fill="#1a2014"/>
+        <ellipse cx="2" cy="-46" rx="7" ry="2.2" fill="#1a2014"/>
+      </symbol>
+      <symbol id="crane" viewBox="-18 -10 36 14">
+        <path d="M-18 0 Q -8 -8 0 -4 Q 8 -8 18 0" stroke="#1a1a14" stroke-width="1.2" fill="none"/>
+        <path d="M-12 -2 L -8 1 M 12 -2 L 8 1" stroke="#1a1a14" stroke-width="1.2" fill="none"/>
+      </symbol>
+    </defs>
+
+    
+    
+    
+    
+    <!-- ===== BACKGROUND: 《青城山图》原画做背景 ===== -->
+    <rect width="1600" height="900" fill="url(#s6-paper)"/>
+    <image href="bg6.jpg?v=23" x="0" y="0" width="1600" height="900"
+           preserveAspectRatio="xMidYMid slice"/>
+    <!-- 轻微米色蒙版，保证前景文字可读 -->
+    <rect width="1600" height="900" fill="#f7efd6" opacity=".12"/>
+    <rect x="0" y="0" width="1600" height="200" fill="#f7efd6" opacity=".55"/>
+    <rect x="0" y="780" width="1600" height="120" fill="#f7efd6" opacity=".45"/>
+
+
+    <!-- ===== HEADER: hanging horizontal banner (匾额) ===== -->
+    <g filter="url(#s6-wet)">
+      <!-- banner body -->
+      <rect x="540" y="60" width="520" height="80" fill="#f7efd6" stroke="#1a1a14" stroke-width="2.4"/>
+      <!-- side decorative caps -->
+      <path d="M540 60 L 510 100 L 540 140 Z" fill="#3a2818" stroke="#1a1a14" stroke-width="2"/>
+      <path d="M1060 60 L 1090 100 L 1060 140 Z" fill="#3a2818" stroke="#1a1a14" stroke-width="2"/>
+      <!-- inner thin border -->
+      <rect x="552" y="72" width="496" height="56" fill="none" stroke="#1a1a14" stroke-width=".8" opacity=".5"/>
+      <!-- hanging tassels -->
+      <line x1="640" y1="60" x2="640" y2="38" stroke="#1a1a14" stroke-width="1.4"/>
+      <line x1="800" y1="60" x2="800" y2="30" stroke="#1a1a14" stroke-width="1.4"/>
+      <line x1="960" y1="60" x2="960" y2="38" stroke="#1a1a14" stroke-width="1.4"/>
+      <circle cx="640" cy="36" r="3" fill="#b8341e"/>
+      <circle cx="800" cy="28" r="3" fill="#b8341e"/>
+      <circle cx="960" cy="36" r="3" fill="#b8341e"/>
+    </g>
+    <text x="800" y="118" text-anchor="middle"
+          font-family="'ZCOOL KuaiLe','STKaiti','KaiTi',serif" font-weight="700" font-size="46"
+          fill="#1a1a14" letter-spacing="20">光 阴 山 水</text>
+
+    <!-- subtitle in calligraphy -->
+    <text x="800" y="178" text-anchor="middle"
+          font-family="'Long Cang','STKaiti','KaiTi',cursive" font-size="22"
+          fill="#3a3024" letter-spacing="8" opacity=".85">二〇二二 ─ 二〇二六 · 四载同行 · 一卷山河</text>
+
+    <!-- ===== UPPER SCROLLS (4 hanging scrolls — year memories) ===== -->
+    <!-- 大一 -->
+    <g transform="translate(220,300)" filter="url(#s6-wet)">
+      <!-- top roller -->
+      <rect x="-95" y="-12" width="190" height="14" fill="#3a2818" stroke="#1a1a14" stroke-width="1.6" rx="4"/>
+      <circle cx="-95" cy="-5" r="3" fill="#b8341e"/>
+      <circle cx="95" cy="-5" r="3" fill="#b8341e"/>
+      <!-- scroll body (rice paper) -->
+      <rect x="-88" y="2" width="176" height="120" fill="#f7efd6" stroke="#1a1a14" stroke-width="1.4"/>
+      <!-- bottom roller -->
+      <rect x="-95" y="122" width="190" height="14" fill="#3a2818" stroke="#1a1a14" stroke-width="1.6" rx="4"/>
+      <circle cx="-95" cy="129" r="3" fill="#b8341e"/>
+      <circle cx="95" cy="129" r="3" fill="#b8341e"/>
+      <!-- bottom tassel -->
+      <line x1="0" y1="136" x2="0" y2="156" stroke="#b8341e" stroke-width="1.6"/>
+      <circle cx="0" cy="160" r="4" fill="#b8341e"/>
+    </g>
+    <text x="220" y="38" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+          font-size="20" font-weight="700" fill="#1a1a14" transform="translate(0,300)">军训 · 初见</text>
+    <text x="220" y="68" text-anchor="middle" font-family="'Long Cang',cursive"
+          font-size="18" fill="#3a3024" transform="translate(0,300)">那一晒，</text>
+    <text x="220" y="92" text-anchor="middle" font-family="'Long Cang',cursive"
+          font-size="18" fill="#3a3024" transform="translate(0,300)">认识了你</text>
+    <text x="220" y="116" text-anchor="middle" font-family="'Caveat',cursive"
+          font-size="13" fill="#7a6a48" font-style="italic" transform="translate(0,300)">二〇二二 · 秋</text>
+
+    <!-- 大二 -->
+    <g transform="translate(560,300)" filter="url(#s6-wet)">
+      <rect x="-95" y="-12" width="190" height="14" fill="#3a2818" stroke="#1a1a14" stroke-width="1.6" rx="4"/>
+      <circle cx="-95" cy="-5" r="3" fill="#b8341e"/>
+      <circle cx="95" cy="-5" r="3" fill="#b8341e"/>
+      <rect x="-88" y="2" width="176" height="120" fill="#f7efd6" stroke="#1a1a14" stroke-width="1.4"/>
+      <rect x="-95" y="122" width="190" height="14" fill="#3a2818" stroke="#1a1a14" stroke-width="1.6" rx="4"/>
+      <circle cx="-95" cy="129" r="3" fill="#b8341e"/>
+      <circle cx="95" cy="129" r="3" fill="#b8341e"/>
+      <line x1="0" y1="136" x2="0" y2="156" stroke="#b8341e" stroke-width="1.6"/>
+      <circle cx="0" cy="160" r="4" fill="#b8341e"/>
+    </g>
+    <text x="560" y="338" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+          font-size="20" font-weight="700" fill="#1a1a14">登山远游</text>
+    <text x="560" y="368" text-anchor="middle" font-family="'Long Cang',cursive"
+          font-size="18" fill="#3a3024">山顶风很冷</text>
+    <text x="560" y="392" text-anchor="middle" font-family="'Long Cang',cursive"
+          font-size="18" fill="#3a3024">但你在身边</text>
+    <text x="560" y="416" text-anchor="middle" font-family="'Caveat',cursive"
+          font-size="13" fill="#7a6a48" font-style="italic">二〇二三 · 冬</text>
+
+    <!-- 大三 -->
+    <g transform="translate(900,300)" filter="url(#s6-wet)">
+      <rect x="-95" y="-12" width="190" height="14" fill="#3a2818" stroke="#1a1a14" stroke-width="1.6" rx="4"/>
+      <circle cx="-95" cy="-5" r="3" fill="#b8341e"/>
+      <circle cx="95" cy="-5" r="3" fill="#b8341e"/>
+      <rect x="-88" y="2" width="176" height="120" fill="#f7efd6" stroke="#1a1a14" stroke-width="1.4"/>
+      <rect x="-95" y="122" width="190" height="14" fill="#3a2818" stroke="#1a1a14" stroke-width="1.6" rx="4"/>
+      <circle cx="-95" cy="129" r="3" fill="#b8341e"/>
+      <circle cx="95" cy="129" r="3" fill="#b8341e"/>
+      <line x1="0" y1="136" x2="0" y2="156" stroke="#b8341e" stroke-width="1.6"/>
+      <circle cx="0" cy="160" r="4" fill="#b8341e"/>
+    </g>
+    <text x="900" y="338" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+          font-size="20" font-weight="700" fill="#1a1a14">挑灯夜战</text>
+    <text x="900" y="368" text-anchor="middle" font-family="'Long Cang',cursive"
+          font-size="18" fill="#3a3024">三更灯火</text>
+    <text x="900" y="392" text-anchor="middle" font-family="'Long Cang',cursive"
+          font-size="18" fill="#3a3024">五更鸡鸣</text>
+    <text x="900" y="416" text-anchor="middle" font-family="'Caveat',cursive"
+          font-size="13" fill="#7a6a48" font-style="italic">二〇二四 · 冬</text>
+
+    <!-- 大四 -->
+    <g transform="translate(1240,300)" filter="url(#s6-wet)">
+      <rect x="-95" y="-12" width="190" height="14" fill="#3a2818" stroke="#1a1a14" stroke-width="1.6" rx="4"/>
+      <circle cx="-95" cy="-5" r="3" fill="#b8341e"/>
+      <circle cx="95" cy="-5" r="3" fill="#b8341e"/>
+      <rect x="-88" y="2" width="176" height="120" fill="#f7efd6" stroke="#1a1a14" stroke-width="1.4"/>
+      <rect x="-95" y="122" width="190" height="14" fill="#3a2818" stroke="#1a1a14" stroke-width="1.6" rx="4"/>
+      <circle cx="-95" cy="129" r="3" fill="#b8341e"/>
+      <circle cx="95" cy="129" r="3" fill="#b8341e"/>
+      <line x1="0" y1="136" x2="0" y2="156" stroke="#b8341e" stroke-width="1.6"/>
+      <circle cx="0" cy="160" r="4" fill="#b8341e"/>
+    </g>
+    <text x="1240" y="338" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+          font-size="20" font-weight="700" fill="#1a1a14">offer 之夜</text>
+    <text x="1240" y="368" text-anchor="middle" font-family="'Long Cang',cursive"
+          font-size="18" fill="#3a3024">你电话那刻</text>
+    <text x="1240" y="392" text-anchor="middle" font-family="'Long Cang',cursive"
+          font-size="18" fill="#3a3024">我替你哭了</text>
+    <text x="1240" y="416" text-anchor="middle" font-family="'Caveat',cursive"
+          font-size="13" fill="#7a6a48" font-style="italic">二〇二五 · 冬</text>
+
+    <!-- ===== THE RIVER (timeline) — winding ink path ===== -->
+    <!-- light water -->
+    <path d="M60 620 Q 220 605 380 625 T 700 615 T 1040 625 T 1380 615 T 1540 620"
+          stroke="#8aa0b0" stroke-width="22" fill="none" opacity=".35" filter="url(#s6-soft)"/>
+    <!-- main ink stroke for the river -->
+    <path d="M60 620 Q 220 605 380 625 T 700 615 T 1040 625 T 1380 615 T 1540 620"
+          stroke="#1a1a14" stroke-width="2.4" fill="none" filter="url(#s6-wet)"/>
+    <!-- water ripples -->
+    <g stroke="#1a1a14" stroke-width=".8" fill="none" opacity=".45">
+      <path d="M150 626 q 14 -3 28 0"/>
+      <path d="M260 622 q 14 -3 28 0"/>
+      <path d="M460 626 q 14 -3 28 0"/>
+      <path d="M600 622 q 14 -3 28 0"/>
+      <path d="M820 626 q 14 -3 28 0"/>
+      <path d="M970 622 q 14 -3 28 0"/>
+      <path d="M1170 626 q 14 -3 28 0"/>
+      <path d="M1310 622 q 14 -3 28 0"/>
+      <path d="M1480 626 q 14 -3 28 0"/>
+    </g>
+
+    <!-- ===== CONNECTORS scrolls -> river ===== -->
+    <g stroke="#3a3024" stroke-width=".9" fill="none" stroke-dasharray="3,5" opacity=".55">
+      <path d="M220 462 Q 220 540 220 614"/>
+      <path d="M560 462 Q 560 540 560 614"/>
+      <path d="M900 462 Q 900 540 900 614"/>
+      <path d="M1240 462 Q 1240 540 1240 614"/>
+    </g>
+
+    <!-- ===== MILESTONES along the river (Chinese-style icons) ===== -->
+    <!-- 大一: 凉亭 (pavilion) -->
+    <g transform="translate(220,620)" filter="url(#s6-wet)">
+      <!-- ink platform spot under pavilion -->
+      <ellipse cx="0" cy="6" rx="34" ry="6" fill="#1a1a14" opacity=".25"/>
+      <!-- curved roof -->
+      <path d="M-28 -22 Q 0 -42 28 -22 Q 14 -18 0 -18 Q -14 -18 -28 -22 Z"
+            fill="#3a2818" stroke="#1a1a14" stroke-width="1.6"/>
+      <path d="M-28 -22 Q 0 -32 28 -22" fill="none" stroke="#1a1a14" stroke-width="1"/>
+      <!-- finial -->
+      <line x1="0" y1="-42" x2="0" y2="-50" stroke="#1a1a14" stroke-width="1.4"/>
+      <circle cx="0" cy="-52" r="2.5" fill="#b8341e"/>
+      <!-- pillars -->
+      <line x1="-22" y1="-18" x2="-22" y2="2" stroke="#1a1a14" stroke-width="1.8"/>
+      <line x1="22" y1="-18" x2="22" y2="2" stroke="#1a1a14" stroke-width="1.8"/>
+      <line x1="0" y1="-18" x2="0" y2="2" stroke="#1a1a14" stroke-width="1.4" opacity=".5"/>
+      <!-- base -->
+      <line x1="-26" y1="2" x2="26" y2="2" stroke="#1a1a14" stroke-width="2"/>
+    </g>
+    <text x="220" y="595" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+          font-size="20" font-weight="700" fill="#1a1a14">大一</text>
+
+    <!-- 大二: 小桥 (small bridge over the river) -->
+    <g transform="translate(560,620)" filter="url(#s6-wet)">
+      <ellipse cx="0" cy="6" rx="38" ry="6" fill="#1a1a14" opacity=".25"/>
+      <!-- arch -->
+      <path d="M-32 4 Q 0 -28 32 4" fill="none" stroke="#1a1a14" stroke-width="2.2"/>
+      <path d="M-32 4 Q 0 -22 32 4" fill="none" stroke="#1a1a14" stroke-width="1.4" opacity=".5"/>
+      <!-- railings -->
+      <path d="M-32 -4 Q 0 -34 32 -4" fill="none" stroke="#1a1a14" stroke-width="1.4"/>
+      <line x1="-22" y1="-12" x2="-22" y2="-2" stroke="#1a1a14" stroke-width="1"/>
+      <line x1="-10" y1="-22" x2="-10" y2="-12" stroke="#1a1a14" stroke-width="1"/>
+      <line x1="10" y1="-22" x2="10" y2="-12" stroke="#1a1a14" stroke-width="1"/>
+      <line x1="22" y1="-12" x2="22" y2="-2" stroke="#1a1a14" stroke-width="1"/>
+    </g>
+    <text x="560" y="595" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+          font-size="20" font-weight="700" fill="#1a1a14">大二</text>
+
+    <!-- 大三: 小舟 (small boat with sail) -->
+    <g transform="translate(900,620)" filter="url(#s6-wet)">
+      <ellipse cx="0" cy="6" rx="36" ry="5" fill="#1a1a14" opacity=".25"/>
+      <!-- hull -->
+      <path d="M-28 0 Q 0 8 28 0 L 22 4 Q 0 10 -22 4 Z"
+            fill="#3a2818" stroke="#1a1a14" stroke-width="1.6"/>
+      <!-- mast -->
+      <line x1="0" y1="0" x2="0" y2="-30" stroke="#1a1a14" stroke-width="1.6"/>
+      <!-- sail -->
+      <path d="M0 -28 L 16 -10 L 0 -10 Z" fill="#f7efd6" stroke="#1a1a14" stroke-width="1.4"/>
+      <path d="M0 -10 L 0 -28" stroke="#1a1a14" stroke-width=".8"/>
+      <!-- tiny person silhouette -->
+      <circle cx="-6" cy="-4" r="1.6" fill="#1a1a14"/>
+    </g>
+    <text x="900" y="595" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+          font-size="20" font-weight="700" fill="#1a1a14">大三</text>
+
+    <!-- 大四: 古塔 (pagoda) -->
+    <g transform="translate(1240,620)" filter="url(#s6-wet)">
+      <ellipse cx="0" cy="6" rx="26" ry="5" fill="#1a1a14" opacity=".25"/>
+      <!-- 3-tier pagoda -->
+      <g stroke="#1a1a14" stroke-width="1.6" fill="#3a2818">
+        <!-- tier 1 (largest base) -->
+        <rect x="-16" y="-10" width="32" height="14"/>
+        <path d="M-20 -10 Q 0 -18 20 -10 Z"/>
+        <!-- tier 2 -->
+        <rect x="-12" y="-26" width="24" height="12"/>
+        <path d="M-16 -26 Q 0 -33 16 -26 Z"/>
+        <!-- tier 3 -->
+        <rect x="-8" y="-40" width="16" height="10"/>
+        <path d="M-12 -40 Q 0 -46 12 -40 Z"/>
+        <!-- finial -->
+        <line x1="0" y1="-46" x2="0" y2="-54" stroke-width="1.4"/>
+        <circle cx="0" cy="-56" r="2" fill="#b8341e" stroke="none"/>
+      </g>
+    </g>
+    <text x="1240" y="595" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+          font-size="20" font-weight="700" fill="#1a1a14">大四</text>
+
+    <!-- 毕业: 远山朝阳 (sun rising behind mountain at far right endpoint) -->
+    <g transform="translate(1480,620)" filter="url(#s6-wet)">
+      <ellipse cx="0" cy="6" rx="36" ry="5" fill="#1a1a14" opacity=".25"/>
+      <!-- sun -->
+      <circle cx="0" cy="-12" r="20" fill="#c89b3c" opacity=".85"/>
+      <!-- sun rays -->
+      <g stroke="#c89b3c" stroke-width="1.6" opacity=".7">
+        <line x1="-30" y1="-12" x2="-24" y2="-12"/>
+        <line x1="24" y1="-12" x2="30" y2="-12"/>
+        <line x1="-22" y1="-28" x2="-18" y2="-24"/>
+        <line x1="18" y1="-28" x2="22" y2="-24"/>
+        <line x1="0" y1="-38" x2="0" y2="-32"/>
+      </g>
+      <!-- distant peak silhouette in front -->
+      <path d="M-28 4 L -10 -18 L 6 -6 L 22 -14 L 32 4 Z"
+            fill="#2a3624" stroke="#1a1a14" stroke-width="1.4"/>
+    </g>
+    <text x="1480" y="595" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+          font-size="20" font-weight="700" fill="#b8341e">毕业</text>
+    <text x="1480" y="660" text-anchor="middle" font-family="'Long Cang',cursive"
+          font-size="14" fill="#3a3024" letter-spacing="2">二〇二六 · 夏</text>
+
+    <!-- ===== LOWER FAN NOTES (折扇 with short memories) ===== -->
+    <!-- under 大一 -->
+    <g transform="translate(220,770) rotate(-3)" filter="url(#s6-wet)">
+      <!-- fan body: a sector arc from -55 to 55 degrees -->
+      <path d="M0 0 L 65 -65 A 92 92 0 0 1 92 0 A 92 92 0 0 1 65 65 Z"
+            fill="#f7efd6" stroke="#1a1a14" stroke-width="1.6" transform="rotate(180)"/>
+      <!-- ribs -->
+      <g stroke="#1a1a14" stroke-width=".8" opacity=".6">
+        <line x1="0" y1="0" x2="-65" y2="-65" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="-40" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="0" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="40" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-65" y2="65" transform="rotate(180)"/>
+      </g>
+      <!-- pivot -->
+      <circle cx="0" cy="0" r="3" fill="#b8341e"/>
+      <!-- text inside fan -->
+      <text y="-30" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+            font-size="15" font-weight="700" fill="#1a1a14">第一次班会</text>
+      <text y="-10" text-anchor="middle" font-family="'Long Cang',cursive"
+            font-size="14" fill="#3a3024">你坐我前面</text>
+    </g>
+
+    <!-- under 大二 -->
+    <g transform="translate(560,770) rotate(2)" filter="url(#s6-wet)">
+      <path d="M0 0 L 65 -65 A 92 92 0 0 1 92 0 A 92 92 0 0 1 65 65 Z"
+            fill="#eef0e0" stroke="#1a1a14" stroke-width="1.6" transform="rotate(180)"/>
+      <g stroke="#1a1a14" stroke-width=".8" opacity=".6">
+        <line x1="0" y1="0" x2="-65" y2="-65" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="-40" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="0" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="40" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-65" y2="65" transform="rotate(180)"/>
+      </g>
+      <circle cx="0" cy="0" r="3" fill="#b8341e"/>
+      <text y="-30" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+            font-size="15" font-weight="700" fill="#1a1a14">期末互救</text>
+      <text y="-10" text-anchor="middle" font-family="'Long Cang',cursive"
+            font-size="14" fill="#3a3024">你抄我笔记</text>
+    </g>
+
+    <!-- under 大三 -->
+    <g transform="translate(900,770) rotate(-2)" filter="url(#s6-wet)">
+      <path d="M0 0 L 65 -65 A 92 92 0 0 1 92 0 A 92 92 0 0 1 65 65 Z"
+            fill="#e2eaf0" stroke="#1a1a14" stroke-width="1.6" transform="rotate(180)"/>
+      <g stroke="#1a1a14" stroke-width=".8" opacity=".6">
+        <line x1="0" y1="0" x2="-65" y2="-65" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="-40" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="0" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="40" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-65" y2="65" transform="rotate(180)"/>
+      </g>
+      <circle cx="0" cy="0" r="3" fill="#b8341e"/>
+      <text y="-30" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+            font-size="15" font-weight="700" fill="#1a1a14">通宵打游戏</text>
+      <text y="-10" text-anchor="middle" font-family="'Long Cang',cursive"
+            font-size="14" fill="#3a3024">天亮就迟到</text>
+    </g>
+
+    <!-- under 大四 -->
+    <g transform="translate(1240,770) rotate(3)" filter="url(#s6-wet)">
+      <path d="M0 0 L 65 -65 A 92 92 0 0 1 92 0 A 92 92 0 0 1 65 65 Z"
+            fill="#f0e4dc" stroke="#1a1a14" stroke-width="1.6" transform="rotate(180)"/>
+      <g stroke="#1a1a14" stroke-width=".8" opacity=".6">
+        <line x1="0" y1="0" x2="-65" y2="-65" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="-40" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="0" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-92" y2="40" transform="rotate(180)"/>
+        <line x1="0" y1="0" x2="-65" y2="65" transform="rotate(180)"/>
+      </g>
+      <circle cx="0" cy="0" r="3" fill="#b8341e"/>
+      <text y="-30" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+            font-size="15" font-weight="700" fill="#1a1a14">散伙饭</text>
+      <text y="-10" text-anchor="middle" font-family="'Long Cang',cursive"
+            font-size="14" fill="#3a3024">谁都没说再见</text>
+    </g>
+
+    <!-- ===== RED SEALS (印章) — top-left + bottom-right ===== -->
+    <g transform="translate(100,110) rotate(-3)" filter="url(#s6-wet)">
+      <rect x="-30" y="-30" width="60" height="60" fill="#b8341e" rx="2"/>
+      <text x="0" y="6" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+            font-size="20" font-weight="700" fill="#f7efd6" letter-spacing="2">山水</text>
+    </g>
+    <g transform="translate(1480,160) rotate(4)" filter="url(#s6-wet)">
+      <rect x="-26" y="-26" width="52" height="52" fill="#b8341e" rx="2"/>
+      <text x="0" y="6" text-anchor="middle" font-family="'ZCOOL KuaiLe','KaiTi',serif"
+            font-size="18" font-weight="700" fill="#f7efd6" letter-spacing="2">长卷</text>
+    </g>
+
+    <!-- ===== BOTTOM CALLIGRAPHY LINE ===== -->
+    <text x="800" y="855" text-anchor="middle" font-family="'Long Cang','KaiTi',cursive"
+          font-size="24" fill="#3a3024" letter-spacing="14" opacity=".85">
+      四 载 同 舟 · 一 程 山 水 · 此 卷 长 留
+    </text>
+  </svg>
+
+  <div class="bottom-pill explorer">
+    <div class="pill-title">TIMELINE · 山水长卷</div>
+    <div class="pill-text">沿河而下 · 凉亭 · 小桥 · 轻舟 · 古塔 · 朝阳</div>
+  </div>
+
+  <button class="back-arrow" data-go="5">←</button>
+</section>
+
+<!-- ====================================================================== -->
+<!-- ============ SCENE 7 — 毕业典礼 ===================================== -->
+<!-- ====================================================================== -->
+<section class="scene scene-7" data-scene="7">
+  <svg class="scene-svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+    <!-- brick wall + ground (same as scene 1) -->
+    <rect x="0" y="0" width="1600" height="720" fill="url(#brick)"/>
+    <rect x="0" y="720" width="1600" height="180" fill="url(#ground)"/>
+
+    <!-- bunting flags (same as scene 1 / 2 / 5) -->
+    <g filter="url(#sketch2)">
+      <path d="M120 80 Q 800 140 1480 80" stroke="#2a2a2a" stroke-width="1.2" fill="none"/>
+      <g stroke="#2a2a2a" stroke-width="1.4" fill="#fbfaf6">
+        <path d="M200 90 L 220 90 L 210 112 Z"/><path d="M280 100 L 300 100 L 290 122 Z"/>
+        <path d="M360 108 L 380 108 L 370 130 Z"/><path d="M440 116 L 460 116 L 450 138 Z"/>
+        <path d="M520 122 L 540 122 L 530 144 Z"/><path d="M600 126 L 620 126 L 610 148 Z"/>
+        <path d="M680 130 L 700 130 L 690 152 Z"/><path d="M760 132 L 780 132 L 770 154 Z"/>
+        <path d="M840 132 L 860 132 L 850 154 Z"/><path d="M920 130 L 940 130 L 930 152 Z"/>
+        <path d="M1000 126 L 1020 126 L 1010 148 Z"/><path d="M1080 122 L 1100 122 L 1090 144 Z"/>
+        <path d="M1160 116 L 1180 116 L 1170 138 Z"/><path d="M1240 108 L 1260 108 L 1250 130 Z"/>
+        <path d="M1320 100 L 1340 100 L 1330 122 Z"/><path d="M1400 90 L 1420 90 L 1410 112 Z"/>
+      </g>
+    </g>
+
+    <!-- hanging "Class of 2026" paper sign from the bunting (centered) -->
+    <g filter="url(#sketch2)">
+      <!-- two strings -->
+      <line x1="700" y1="135" x2="700" y2="200" stroke="#2a2a2a" stroke-width="1.2"/>
+      <line x1="900" y1="135" x2="900" y2="200" stroke="#2a2a2a" stroke-width="1.2"/>
+      <!-- paper (deckle edges) -->
+      <path d="M650 200 L 950 200 L 956 280 Q 800 296 644 280 Z"
+            fill="#fbfaf6" stroke="#2a2a2a" stroke-width="1.8"/>
+      <!-- pins -->
+      <circle cx="700" cy="200" r="3" fill="#a02828" stroke="#2a2a2a" stroke-width="1"/>
+      <circle cx="900" cy="200" r="3" fill="#a02828" stroke="#2a2a2a" stroke-width="1"/>
+      <!-- inner dashed border -->
+      <path d="M662 212 L 938 212 L 940 270 Q 800 282 660 270 Z"
+            fill="none" stroke="#2a2a2a" stroke-width=".7" stroke-dasharray="3,3" opacity=".5"/>
+    </g>
+    <text x="800" y="245" text-anchor="middle"
+          font-family="'ZCOOL KuaiLe','Caveat',cursive" font-weight="700" font-size="30"
+          fill="#1a1a1a" letter-spacing="2">Class of 2026</text>
+    <text x="800" y="270" text-anchor="middle"
+          font-family="'Caveat',cursive" font-size="16"
+          fill="#7a7a7a" letter-spacing="1" font-style="italic">— 毕 业 快 乐 —</text>
+
+
+    <!-- ===== HERO GRADUATION CAP — large floating focal point ===== -->
+    <!-- soft warm halo behind the cap -->
+    <g>
+      <radialGradient id="cap-halo" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#fff3c4" stop-opacity=".85"/>
+        <stop offset="55%" stop-color="#fde9a8" stop-opacity=".4"/>
+        <stop offset="100%" stop-color="#fde9a8" stop-opacity="0"/>
+      </radialGradient>
+      <circle cx="800" cy="440" r="240" fill="url(#cap-halo)"/>
+      <!-- subtle radiating sketch rays -->
+      <g stroke="#c9a544" stroke-width="1.2" stroke-linecap="round" opacity=".55" fill="none">
+        <line x1="800" y1="220" x2="800" y2="190"/>
+        <line x1="680" y1="240" x2="660" y2="220"/>
+        <line x1="920" y1="240" x2="940" y2="220"/>
+        <line x1="600" y1="320" x2="572" y2="306"/>
+        <line x1="1000" y1="320" x2="1028" y2="306"/>
+        <line x1="580" y1="440" x2="552" y2="440"/>
+        <line x1="1020" y1="440" x2="1048" y2="440"/>
+        <line x1="600" y1="560" x2="576" y2="576"/>
+        <line x1="1000" y1="560" x2="1024" y2="576"/>
+      </g>
+    </g>
+
+    <!-- THE CAP itself, hero size, tilted -->
+    <g transform="translate(800,440) rotate(-8)" filter="url(#sketch)">
+      <!-- under-cap rounded skullcap -->
+      <path d="M-130 0 Q 0 -34 130 0 Q 70 36 0 36 Q -70 36 -130 0 Z"
+            fill="#1a1a1a" stroke="#0a0a0a" stroke-width="3"/>
+      <!-- top highlight on skullcap -->
+      <path d="M-110 -10 Q 0 -32 110 -10" fill="none" stroke="#5a5a5a" stroke-width="2" opacity=".55"/>
+      <!-- mortarboard (flat square top) -->
+      <path d="M-160 -22 L 0 -78 L 160 -22 L 0 26 Z"
+            fill="#0a0a0a" stroke="#0a0a0a" stroke-width="3"/>
+      <!-- mortarboard highlight edges -->
+      <path d="M-160 -22 L 0 -78 L 160 -22" fill="none" stroke="#3a3a3a" stroke-width="2"/>
+      <path d="M-160 -22 L 0 26" stroke="#2a2a2a" stroke-width="1.4" opacity=".7"/>
+      <path d="M160 -22 L 0 26" stroke="#2a2a2a" stroke-width="1.4" opacity=".7"/>
+      <!-- center button -->
+      <circle cx="0" cy="-78" r="8" fill="#a02828" stroke="#1a1a1a" stroke-width="1.6"/>
+      <circle cx="-2" cy="-80" r="2.5" fill="#d04848" opacity=".7"/>
+      <!-- tassel cord from button -->
+      <path d="M0 -78 Q 80 -60 140 -10 Q 160 30 150 70"
+            fill="none" stroke="#a02828" stroke-width="3" stroke-linecap="round"/>
+      <!-- tassel head -->
+      <g transform="translate(150,70)">
+        <!-- knot -->
+        <ellipse cx="0" cy="0" rx="9" ry="6" fill="#a02828" stroke="#5a1010" stroke-width="1.4"/>
+        <!-- strands -->
+        <g stroke="#a02828" stroke-width="2" stroke-linecap="round">
+          <line x1="-8" y1="6" x2="-10" y2="36"/>
+          <line x1="-4" y1="6" x2="-5" y2="40"/>
+          <line x1="0" y1="6" x2="0" y2="44"/>
+          <line x1="4" y1="6" x2="5" y2="40"/>
+          <line x1="8" y1="6" x2="10" y2="36"/>
+          <line x1="-6" y1="6" x2="-7" y2="32"/>
+          <line x1="6" y1="6" x2="7" y2="32"/>
+        </g>
+      </g>
+      <!-- diagonal stitch line on mortarboard -->
+      <path d="M-110 -34 Q 0 -52 110 -34" fill="none" stroke="#3a3a3a" stroke-width="1" opacity=".5" stroke-dasharray="2,3"/>
+    </g>
+
+    <!-- floating petals + tiny stars around the cap (sparse, scene-1 palette) -->
+    <g filter="url(#sketch2)">
+      <g stroke="#2a2a2a" stroke-width="1" fill="#fbfaf6">
+        <ellipse cx="540" cy="320" rx="8" ry="4.5" transform="rotate(25 540 320)"/>
+        <ellipse cx="1060" cy="340" rx="8" ry="4.5" transform="rotate(-20 1060 340)"/>
+        <ellipse cx="500" cy="500" rx="7" ry="4" transform="rotate(10 500 500)"/>
+        <ellipse cx="1100" cy="520" rx="7" ry="4" transform="rotate(-15 1100 520)"/>
+      </g>
+      <g stroke="#a02828" stroke-width="1.6" fill="none" opacity=".8">
+        <path d="M620 280 L 624 272 L 632 276 L 626 282 L 628 290 L 620 286 L 614 290 L 616 282 L 610 276 L 618 272 Z"/>
+        <path d="M980 290 L 984 282 L 992 286 L 986 292 L 988 300 L 980 296 L 974 300 L 976 292 L 970 286 L 978 282 Z" transform="scale(.8) translate(245 70)"/>
+      </g>
+    </g>
+
+    <!-- ===== CHALK MESSAGE on the brick wall (left side) ===== -->
+    <g font-family="'Caveat','Long Cang',cursive" fill="#fafafa" opacity=".88">
+      <text x="180" y="380" font-size="34" transform="rotate(-3 180 380)">致 小 Z</text>
+      <text x="180" y="420" font-size="20" fill="#e8e8e8" transform="rotate(-3 180 380)">谢谢这四年</text>
+      <!-- chalk heart -->
+      <g transform="translate(160 460) rotate(-8)" fill="none" stroke="#fafafa" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".85">
+        <path d="M0 8 C -8 0 -16 -8 -8 -16 C -2 -22 4 -18 8 -10 C 12 -18 18 -22 24 -16 C 32 -8 24 0 16 8 L 8 14 Z"/>
+      </g>
+      <text x="200" y="478" font-size="18" fill="#e8e8e8" transform="rotate(-3 180 380)">— 兼祺</text>
+    </g>
+
+    <!-- ===== CHALK MESSAGE on the brick wall (right side) ===== -->
+    <g font-family="'Caveat','Long Cang',cursive" fill="#fafafa" opacity=".75">
+      <text x="1240" y="380" font-size="22" transform="rotate(2 1240 380)">June 30, 2026</text>
+      <text x="1240" y="412" font-size="20" fill="#e8e8e8" transform="rotate(2 1240 380)">we made it.</text>
+      <!-- small chalk star -->
+      <g transform="translate(1420 392) rotate(15)" fill="none" stroke="#fafafa" stroke-width="2.4" stroke-linejoin="round" opacity=".7">
+        <path d="M0 -14 L 4 -4 L 14 -4 L 6 3 L 10 14 L 0 7 L -10 14 L -6 3 L -14 -4 L -4 -4 Z"/>
+      </g>
+    </g>
+
+    <!-- ===== WOODEN BENCH against the wall (center) ===== -->
+    <g filter="url(#sketch)">
+      <!-- seat -->
+      <path d="M540 660 L 1060 660 L 1080 680 L 520 680 Z"
+            fill="#c89866" stroke="#2a2a2a" stroke-width="2"/>
+      <!-- seat wood grain -->
+      <g stroke="#7a5a3a" stroke-width=".8" opacity=".55" fill="none">
+        <path d="M540 668 L 1080 668"/>
+        <path d="M540 673 L 1080 673"/>
+      </g>
+      <!-- back support -->
+      <path d="M560 660 L 560 580 L 1040 580 L 1040 660" fill="none" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M560 600 L 1040 600" stroke="#2a2a2a" stroke-width="1.6"/>
+      <path d="M560 620 L 1040 620" stroke="#2a2a2a" stroke-width="1.4" opacity=".7"/>
+      <!-- vertical slats on back -->
+      <g stroke="#2a2a2a" stroke-width="1.4">
+        <line x1="640" y1="600" x2="640" y2="660"/>
+        <line x1="720" y1="600" x2="720" y2="660"/>
+        <line x1="800" y1="600" x2="800" y2="660"/>
+        <line x1="880" y1="600" x2="880" y2="660"/>
+        <line x1="960" y1="600" x2="960" y2="660"/>
+      </g>
+      <!-- legs (front 2) -->
+      <path d="M560 680 L 555 760 L 575 760 L 575 680 Z" fill="#a4763d" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M1040 680 L 1035 760 L 1055 760 L 1055 680 Z" fill="#a4763d" stroke="#2a2a2a" stroke-width="2"/>
+      <!-- back legs (faint) -->
+      <line x1="560" y1="580" x2="555" y2="760" stroke="#2a2a2a" stroke-width="1.4" opacity=".4"/>
+      <line x1="1040" y1="580" x2="1045" y2="760" stroke="#2a2a2a" stroke-width="1.4" opacity=".4"/>
+      <!-- subtle shadow under bench -->
+      <ellipse cx="800" cy="765" rx="280" ry="6" fill="#2a2a2a" opacity=".15"/>
+    </g>
+
+    <!-- ===== ROLLED DIPLOMA SCROLL resting on the bench (right of cap) ===== -->
+    <g transform="translate(900,650) rotate(-6)" filter="url(#sketch)">
+      <!-- rolled scroll body -->
+      <rect x="-90" y="-12" width="180" height="22" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="1.8"/>
+      <!-- end caps -->
+      <ellipse cx="-90" cy="-1" rx="6" ry="11" fill="#e8e2cf" stroke="#2a2a2a" stroke-width="1.6"/>
+      <ellipse cx="90" cy="-1" rx="6" ry="11" fill="#e8e2cf" stroke="#2a2a2a" stroke-width="1.6"/>
+      <!-- thin ribbon tied around -->
+      <rect x="-6" y="-16" width="12" height="30" fill="#a02828" opacity=".85"/>
+      <rect x="-6" y="-16" width="12" height="30" fill="none" stroke="#2a2a2a" stroke-width=".8"/>
+      <!-- horizontal lines on paper -->
+      <line x1="-78" y1="-4" x2="-12" y2="-4" stroke="#7a7a7a" stroke-width=".5"/>
+      <line x1="12" y1="-4" x2="78" y2="-4" stroke="#7a7a7a" stroke-width=".5"/>
+      <line x1="-78" y1="4" x2="-12" y2="4" stroke="#7a7a7a" stroke-width=".5"/>
+      <line x1="12" y1="4" x2="78" y2="4" stroke="#7a7a7a" stroke-width=".5"/>
+    </g>
+
+    <!-- ===== SMALL BOUQUET resting on the bench (left of cap) ===== -->
+    <g transform="translate(620,648)" filter="url(#sketch)">
+      <!-- wrapping paper (kraft) -->
+      <path d="M-32 16 L 32 16 L 26 36 L -26 36 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="1.8"/>
+      <path d="M-26 36 L -32 16 M 26 36 L 32 16" stroke="#2a2a2a" stroke-width="1"/>
+      <!-- twine -->
+      <path d="M-20 26 Q 0 30 20 26" stroke="#2a2a2a" stroke-width="1" fill="none"/>
+      <!-- stems -->
+      <g stroke="#2a2a2a" stroke-width="1.2" fill="none">
+        <path d="M-12 14 Q -14 4 -10 -8"/>
+        <path d="M0 14 Q 0 0 2 -16"/>
+        <path d="M12 14 Q 14 4 10 -8"/>
+        <path d="M-4 14 Q -8 4 -16 -4"/>
+        <path d="M4 14 Q 8 4 16 -4"/>
+      </g>
+      <!-- leaves -->
+      <g fill="#bce8d8" stroke="#2a2a2a" stroke-width="1">
+        <path d="M-18 -2 q -8 -10 -2 -20 q 8 10 2 20 Z"/>
+        <path d="M18 -2 q 8 -10 2 -20 q -8 10 -2 20 Z"/>
+      </g>
+      <!-- flower heads (simple sketchy, cream + soft pink, no garish) -->
+      <g stroke="#2a2a2a" stroke-width="1.2">
+        <g transform="translate(-10,-12)">
+          <circle r="9" fill="#fbfaf6"/>
+          <circle r="3" fill="#e9c46a"/>
+          <g fill="none" stroke="#2a2a2a" stroke-width=".8">
+            <path d="M-5 -5 L -7 -7 M 5 -5 L 7 -7 M -5 5 L -7 7 M 5 5 L 7 7 M 0 -8 L 0 -10 M 0 8 L 0 10"/>
+          </g>
+        </g>
+        <g transform="translate(4,-18)">
+          <circle r="8" fill="#f7d6c8"/>
+          <circle r="2.5" fill="#e9c46a"/>
+        </g>
+        <g transform="translate(14,-6)">
+          <circle r="7" fill="#fbfaf6"/>
+          <circle r="2" fill="#e9c46a"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ===== TINY PAPER NOTE tucked under the diploma ===== -->
+    <g transform="translate(960,690) rotate(-12)" filter="url(#sketch2)">
+      <rect x="-26" y="-16" width="52" height="32" fill="#fff7d6" stroke="#2a2a2a" stroke-width="1.2"/>
+      <line x1="-20" y1="-8" x2="20" y2="-8" stroke="#7a7a7a" stroke-width=".5"/>
+      <line x1="-20" y1="-1" x2="20" y2="-1" stroke="#7a7a7a" stroke-width=".5"/>
+      <line x1="-20" y1="6" x2="20" y2="6" stroke="#7a7a7a" stroke-width=".5"/>
+      <text x="0" y="3" text-anchor="middle" font-family="'Long Cang','Caveat',cursive"
+            font-size="11" fill="#2a2a2a">见字如面</text>
+    </g>
+
+    <!-- ===== SMALL POTTED PLANT on the ground far-left (echoing scene 1) ===== -->
+    <g transform="translate(120,720)" filter="url(#sketch)">
+      <path d="M0 0 L 60 0 L 52 50 L 8 50 Z" fill="#fbfaf6" stroke="#2a2a2a" stroke-width="2"/>
+      <path d="M-2 0 L 62 0" stroke="#2a2a2a" stroke-width="2"/>
+      <g fill="none" stroke="#2a2a2a" stroke-width="1.6">
+        <path d="M14 0 Q 8 -22 0 -38"/>
+        <path d="M24 0 Q 22 -20 18 -42"/>
+        <path d="M34 0 Q 36 -22 50 -50"/>
+        <path d="M44 0 Q 50 -22 62 -36"/>
+      </g>
+      <g fill="#fafafa" stroke="#2a2a2a" stroke-width="1.4">
+        <path d="M-6 -36 q -4 -8 6 -10 q 4 -6 10 -2 q 6 -2 8 4 q 6 4 0 10 q 4 6 -6 8 q -4 6 -10 0 q -8 0 -8 -10 z"/>
+        <path d="M48 -50 q -3 -6 5 -8 q 3 -4 8 -1 q 5 -2 6 4 q 5 3 0 8 q 3 5 -5 6 q -3 5 -8 0 q -6 0 -6 -9 z"/>
+        <path d="M58 -34 q -3 -6 5 -8 q 3 -4 8 -1 q 5 -2 6 4 q 5 3 0 8 q 3 5 -5 6 q -3 5 -8 0 q -6 0 -6 -9 z"/>
+      </g>
+    </g>
+
+    <!-- ===== fallen petals on the ground (very few, plain) ===== -->
+    <g stroke="#2a2a2a" stroke-width="1" fill="#fbfaf6">
+      <ellipse cx="480" cy="800" rx="7" ry="4" transform="rotate(20 480 800)"/>
+      <ellipse cx="540" cy="820" rx="6" ry="3.5" transform="rotate(-15 540 820)"/>
+      <ellipse cx="1080" cy="810" rx="7" ry="4" transform="rotate(35 1080 810)"/>
+      <ellipse cx="1150" cy="830" rx="6" ry="3.5" transform="rotate(-25 1150 830)"/>
+      <ellipse cx="660" cy="840" rx="6" ry="3.5" transform="rotate(45 660 840)"/>
+      <ellipse cx="990" cy="850" rx="7" ry="4" transform="rotate(-10 990 850)"/>
+    </g>
+
+    <!-- ===== TORN PAPER CAPTION at bottom center ===== -->
+    <g filter="url(#sketch2)">
+      <path d="M540 850
+               L 1060 850
+               L 1056 868 L 1052 874 L 1044 870 L 1036 876 L 1024 870 L 1008 876 L 988 870
+               L 962 876 L 932 870 L 900 876 L 866 870 L 836 876 L 802 870 L 770 876 L 736 870
+               L 700 876 L 666 870 L 632 876 L 600 870 L 568 876 L 548 872 Z"
+            fill="#fbfaf6" stroke="#2a2a2a" stroke-width="1.8"/>
+    </g>
+    <text x="800" y="868" text-anchor="middle"
+          font-family="'ZCOOL KuaiLe','Caveat',cursive" font-weight="700" font-size="22"
+          fill="#1a1a1a" letter-spacing="6">致 小 Z · 后 会 有 期</text>
+  </svg>
+
+  <div class="bottom-pill explorer">
+    <div class="pill-title">CONGRATS</div>
+    <div class="pill-text">愿你前程似锦 · 也愿我们后会有期</div>
+  </div>
+
+  <button class="back-arrow" data-go="6">←</button>
+</section>
+
+<!-- ====== GLOBAL SCENE NAV ====== -->
+<div class="scene-nav">
+  <button id="navPrev" class="nav-btn" title="上一页 (←)">←</button>
+  <div class="scene-dots">
+    <button class="scene-dot active" data-target="1" title="校门"></button>
+    <button class="scene-dot" data-target="2" title="时光走廊"></button>
+    <button class="scene-dot" data-target="3" title="主题相册"></button>
+    <button class="scene-dot" data-target="4" title="校园地图"></button>
+    <button class="scene-dot" data-target="5" title="留言寄语"></button>
+    <button class="scene-dot" data-target="6" title="时间线"></button>
+    <button class="scene-dot" data-target="7" title="毕业典礼"></button>
+  </div>
+  <button id="navNext" class="nav-btn" title="下一页 (→)">→</button>
+</div>
+
+<script src="script.js?v=23"></script>
+</body>
+</html>
