@@ -87,7 +87,21 @@
   </button>
 </div>
 
-<div class="scene-counter">#<span id="sceneNum">0</span></div>
+<div class="scene-switcher">
+  <button id="sceneSwitcherBtn" class="scene-switcher-main" title="切换界面" aria-haspopup="true" aria-expanded="false">
+    #<span id="sceneNum">0</span>
+  </button>
+  <button id="sceneNext" class="scene-switcher-next" title="下一页">-&gt;</button>
+  <div id="sceneMenu" class="scene-menu" hidden>
+    <button class="scene-menu-item active" data-target="1" title="校门">#0 校门</button>
+    <button class="scene-menu-item" data-target="2" title="时光走廊">#1 时光走廊</button>
+    <button class="scene-menu-item" data-target="3" title="主题相册">#2 主题相册</button>
+    <button class="scene-menu-item" data-target="4" title="校园地图">#3 校园地图</button>
+    <button class="scene-menu-item" data-target="5" title="留言寄语">#4 留言寄语</button>
+    <button class="scene-menu-item" data-target="6" title="时间线">#5 时间线</button>
+    <button class="scene-menu-item" data-target="7" title="毕业典礼">#6 毕业典礼</button>
+  </div>
+</div>
 
 <!-- ====================================================================== -->
 <!-- ============ SCENE 1 — 校门：给小Z ================================== -->
@@ -1772,21 +1786,6 @@
 
   <button class="back-arrow" data-go="6">←</button>
 </section>
-
-<!-- ====== GLOBAL SCENE NAV ====== -->
-<div class="scene-nav">
-  <button id="navPrev" class="nav-btn" title="上一页 (←)">←</button>
-  <div class="scene-dots">
-    <button class="scene-dot active" data-target="1" title="校门"></button>
-    <button class="scene-dot" data-target="2" title="时光走廊"></button>
-    <button class="scene-dot" data-target="3" title="主题相册"></button>
-    <button class="scene-dot" data-target="4" title="校园地图"></button>
-    <button class="scene-dot" data-target="5" title="留言寄语"></button>
-    <button class="scene-dot" data-target="6" title="时间线"></button>
-    <button class="scene-dot" data-target="7" title="毕业典礼"></button>
-  </div>
-  <button id="navNext" class="nav-btn" title="下一页 (→)">→</button>
-</div>
 
 <script src="script.js?v=23"></script>
 </body>
