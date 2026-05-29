@@ -15,10 +15,51 @@ button{background:none;border:none;cursor:pointer;font:inherit;color:inherit}
 .hud-btn:hover{background:#fff;transform:translateY(-2px) rotate(0)}
 .hud-btn svg{width:22px;height:22px}
 
-.scene-counter{
-  position:fixed;top:74px;right:30px;z-index:40;
-  font-family:'Caveat',cursive;font-size:46px;color:#bdbdbd;font-weight:700;
-  pointer-events:none;user-select:none;
+.scene-switcher{
+  position:fixed;top:72px;right:24px;z-index:45;
+  display:flex;align-items:center;gap:10px;
+}
+.scene-switcher-main,
+.scene-switcher-next{
+  border:1.5px solid #222;background:#fbfaf6;color:#222;
+  box-shadow:2px 2px 0 rgba(0,0,0,.14);
+  transition:transform .15s ease, background .15s ease, box-shadow .15s ease;
+}
+.scene-switcher-main{
+  min-width:80px;height:48px;padding:0 18px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Caveat',cursive;font-size:34px;font-weight:700;line-height:1;
+}
+.scene-switcher-next{
+  width:52px;height:48px;border-radius:999px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Special Elite',monospace;font-size:18px;
+}
+.scene-switcher-main:hover,
+.scene-switcher-next:hover{
+  background:#fff;transform:translateY(-2px);box-shadow:3px 4px 0 rgba(0,0,0,.16);
+}
+.scene-switcher-main[aria-expanded="true"]{
+  background:#fff7dc;
+}
+.scene-menu{
+  position:absolute;top:58px;right:62px;min-width:190px;padding:10px;
+  border:1.5px solid #222;border-radius:14px;background:#fbfaf6;
+  box-shadow:4px 6px 0 rgba(0,0,0,.12), 10px 14px 22px rgba(0,0,0,.16);
+  display:grid;gap:6px;
+}
+.scene-menu[hidden]{display:none}
+.scene-menu-item{
+  width:100%;padding:10px 12px;border:1.2px solid transparent;border-radius:10px;
+  text-align:left;background:transparent;color:#222;
+  font-family:'Patrick Hand','Indie Flower',sans-serif;font-size:17px;
+  transition:background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.scene-menu-item:hover{
+  background:#fff7dc;border-color:#d1b36b;transform:translateX(-1px);
+}
+.scene-menu-item.active{
+  background:#222;color:#fbfaf6;
 }
 
 /* Scenes */
@@ -181,29 +222,6 @@ button{background:none;border:none;cursor:pointer;font:inherit;color:inherit}
 .sticky.n7 .tape{transform:translateX(-50%) rotate(-3deg);background:repeating-linear-gradient(45deg,rgba(160,130,90,.55) 0 6px,rgba(180,150,110,.55) 6px 12px)}
 .sticky.n8 .tape{transform:translateX(-50%) rotate(4deg);background:repeating-linear-gradient(45deg,rgba(180,150,90,.55) 0 6px,rgba(200,170,110,.55) 6px 12px)}
 
-/* ===== Global scene nav ===== */
-.scene-nav{
-  position:fixed;left:50%;bottom:14px;transform:translateX(-50%);
-  display:flex;align-items:center;gap:18px;z-index:80;
-  background:#fffbe9;border:2px solid #222;padding:10px 22px;border-radius:30px;
-  box-shadow:2px 2px 0 rgba(0,0,0,.15);
-}
-.nav-btn{
-  width:42px;height:42px;border:1.4px solid #222;border-radius:50%;background:#fff;
-  font-family:'Caveat',cursive;font-weight:700;font-size:24px;line-height:1;
-  display:flex;align-items:center;justify-content:center;
-  transition:transform .15s ease, background .15s ease;
-}
-.nav-btn:hover:not(:disabled){background:#222;color:#fff;transform:translateY(-1px)}
-.nav-btn:disabled{opacity:.3;cursor:not-allowed}
-.scene-dots{display:flex;gap:10px}
-.scene-dot{
-  width:16px;height:16px;border-radius:50%;border:1.3px solid #222;background:#fff;
-  transition:transform .15s ease, background .15s ease;cursor:pointer;
-}
-.scene-dot:hover{transform:scale(1.2)}
-.scene-dot.active{background:#222;box-shadow:0 0 0 3px rgba(0,0,0,.15)}
-
 /* ===== Scene 7 hero cap ===== */
 .scene-7 .hero-cap-halo{
   animation:heroCapGlow 5.8s ease-in-out infinite;
@@ -246,7 +264,11 @@ button{background:none;border:none;cursor:pointer;font:inherit;color:inherit}
 
 @media (max-width:900px){
   .paper-card{right:50%;top:auto;bottom:18vh;transform:translateX(50%) rotate(.6deg);width:80vw}
-  .scene-counter{right:24px;top:80px;font-size:32px}
+  .scene-switcher{right:18px;top:82px;gap:8px}
+  .scene-switcher-main{min-width:68px;height:42px;padding:0 14px;font-size:28px}
+  .scene-switcher-next{width:46px;height:42px;font-size:16px}
+  .scene-menu{top:50px;right:54px;min-width:162px;padding:8px}
+  .scene-menu-item{padding:9px 10px;font-size:15px}
   .bottom-pill{min-width:240px;padding:8px 14px;bottom:78px}
   .card-title{font-size:24px}
   .sticky{width:42vw;min-height:140px}

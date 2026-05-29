@@ -1,17 +1,37 @@
 (() => {
   const scenes = document.querySelectorAll('.scene');
   const sceneNum = document.getElementById('sceneNum');
+  const sceneSwitcherBtn = document.getElementById('sceneSwitcherBtn');
+  const sceneNextBtn = document.getElementById('sceneNext');
+  const sceneMenu = document.getElementById('sceneMenu');
+  const sceneMenuItems = document.querySelectorAll('.scene-menu-item');
   const total = scenes.length;
+
+  function closeSceneMenu(){
+    if (!sceneMenu || !sceneSwitcherBtn) return;
+    sceneMenu.hidden = true;
+    sceneSwitcherBtn.setAttribute('aria-expanded', 'false');
+  }
+
+  function toggleSceneMenu(){
+    if (!sceneMenu || !sceneSwitcherBtn) return;
+    const willOpen = sceneMenu.hidden;
+    sceneMenu.hidden = !willOpen;
+    sceneSwitcherBtn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+  }
 
   function go(n){
     n = Math.max(1, Math.min(total, n));
     scenes.forEach(s => s.classList.toggle('active', s.dataset.scene === String(n)));
     sceneNum.textContent = (n === 1) ? 0 : (n - 1);
-    document.getElementById('navPrev').disabled = (n === 1);
-    document.getElementById('navNext').disabled = (n === total);
-    document.querySelectorAll('.scene-dot').forEach(d => {
-      d.classList.toggle('active', parseInt(d.dataset.target,10) === n);
+    sceneMenuItems.forEach(item => {
+      const active = parseInt(item.dataset.target,10) === n;
+      item.classList.toggle('active', active);
+      if (active && sceneSwitcherBtn) {
+        sceneSwitcherBtn.title = `切换界面：${item.textContent.trim()}`;
+      }
     });
+    closeSceneMenu();
   }
   window.__go = go;
 
@@ -115,17 +135,24 @@
   document.getElementById('menuBtn').addEventListener('click', () => go(1));
   document.getElementById('trophyBtn').addEventListener('click', () => go(total)); // graduation ceremony
 
-  // global nav
-  document.getElementById('navPrev').addEventListener('click', () => {
-    const n = parseInt(document.querySelector('.scene.active').dataset.scene,10);
-    if (n > 1) go(n-1);
+  // top-right scene switcher
+  sceneSwitcherBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    toggleSceneMenu();
   });
-  document.getElementById('navNext').addEventListener('click', () => {
+  sceneNextBtn.addEventListener('click', () => {
     const n = parseInt(document.querySelector('.scene.active').dataset.scene,10);
-    if (n < total) go(n+1);
+    go((n % total) + 1);
   });
-  document.querySelectorAll('.scene-dot').forEach(d => {
-    d.addEventListener('click', () => go(parseInt(d.dataset.target,10)));
+  sceneMenuItems.forEach(item => {
+    item.addEventListener('click', e => {
+      e.stopPropagation();
+      go(parseInt(item.dataset.target,10));
+    });
+  });
+  document.addEventListener('click', e => {
+    if (sceneMenu.hidden) return;
+    if (!sceneMenu.contains(e.target) && e.target !== sceneSwitcherBtn) closeSceneMenu();
   });
 
   // init
